@@ -199,11 +199,8 @@ test test test test test test test test test test test test test test test test 
 <br>
     Yes, you are welcome to fork this repo. <br>
     However, please give all proper credit by linking back to me
-    <br><br>
-    <h6> You could also give me a star if you like this project 😉⭐ </h6>
     <br>
-
-    
+    <h5> You could also give me a star if you like this project 😉⭐ </h5> 
 <!-- CLOSED -->
 </details>
 <br/><br/>
@@ -224,17 +221,20 @@ System Requirements:
 <li>Node.js 16.8 or later.
 <li>macOS, Windows (including WSL), and Linux are supported.
 </ul>
+<br>
 
 First, Install dependencies
 ```bash
 npm install
 ```
+<br>
 
 Second, run the development server:
 
 ```bash
 npm run dev
 ```
+<br>
 
 Third, Open up <code>localhost:3000</code> to view your application. <br>
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -245,8 +245,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 <li>The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 <li>This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 </ul>
-<br>
-<br>
 
 <!-- CLOSED -->
 </details>
@@ -255,7 +253,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 
-### 👷‍♂️🏗 Building and Deploying on Vercel 👷‍♂️🏗 
+### 👷‍♂️🏗 Deploying on Vercel 👷‍♂️🏗 
 ---------------------------------------------------
 
 <!-- SECTION container open -->
