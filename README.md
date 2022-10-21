@@ -118,7 +118,10 @@ You can see all tickets created & closed here  :   <a href="https://github.com/D
 
 
 
+
+
 ### Demo Image
+<!-- -------------------------------------------------------------------------- -->
 <hr>
 
 <!-- Demo Image 🎯🎯🎯 -->
@@ -129,14 +132,20 @@ You can see all tickets created & closed here  :   <a href="https://github.com/D
 <br><br><br>
 
 
+
+
+
+
+
+
+
+
+
 <!-- -------------------------------------------------------------------------- -->
 
 <h1 align='center'> Development Journey</h1>
 
 <!-- -------------------------------------------------------------------------- -->
-
-
-<br/>
 
 In this section, I'll guide you through the step-by-step process of bringing this project to life. From initial concept to final implementation, I've documented my progress, highlighting the tools, technologies, and methodologies used along the way.
 
@@ -145,8 +154,6 @@ Please note that this project was primarily a learning experience. While there m
 Join me on this behind-the-scenes adventure as I share exciting milestones, challenges, and valuable lessons learned as a solo developer. Experience the transformation of an idea into a fully functional ecommerce platform.
 <br>
 <hr>
-
-<br/>
 
 <!-- DEV JOURNEY CONTAINER OPEN -->
 <details>
