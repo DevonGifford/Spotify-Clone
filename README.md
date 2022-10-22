@@ -155,15 +155,17 @@ Join me on this behind-the-scenes adventure as I share exciting milestones, chal
 <br>
 <hr>
 
+<!-- -------------------------------------------------------------------------- -->
 <!-- DEV JOURNEY CONTAINER OPEN -->
 <details>
 <summary>  Click here to expand and see all the steps I took to build this project: </summary>
+<br/><br/>
 
-<br/>
-<br/>
+<!-- -------------------------------------------------------------------------- -->
 
 
-## 1. Scaffolding the Project 
+#### 1. TEMPLATE
+<!-- -------------------------------------------------------------------------- -->
 <hr>
 <!-- SECTION container open -->
 <details>
@@ -175,12 +177,18 @@ test test test test test test test test test test test test test test test test 
 <!-- SECTION container closed -->
 </details>
 <br/><br/>
+<!-- -------------------------------------------------------------------------- -->
 
 
 
+
+
+<!-- -------------------------------------------------------------------------- -->
 <!-- DEV JOURNEY CONTAINER CLOSED -->
 </details>
-<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+<br/><br/><br/><br/>
 
 
 
@@ -236,21 +244,46 @@ npm install
 ```
 <br>
 
-Second, run the development server:
+Second, setup .env file
+
+
+```js
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+```
+
+<br>
+
+Third, add SQL Tables
+<br>
+Use `database.sql` file, create songs and liked_songs table 
+
+<br>
+
+Then, run the development server:
 
 ```bash
 npm run dev
 ```
 <br>
 
-Third, Open up <code>localhost:3000</code> to view your application. <br>
+Finally, Open up <code>localhost:3000</code> to view your application. <br>
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 <ul>
 <li>You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-<li>[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+
+<!-- <li>[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+
 <li>The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-<li>This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+<li>This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font. -->
+
 </ul>
 
 <!-- CLOSED -->
