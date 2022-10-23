@@ -13,8 +13,6 @@
     <img src="public/assets/github-read-me/SpotifyClone.webp" alt="Demo" title="DemoImage" width="500" height="300">
 </p>
 
-
-
 <!-- Tech Used in this Project
 <p align='center'>
     <a href="https://skillicons.dev">
@@ -26,12 +24,14 @@
 
 
 
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+
 <h1 align='center'> Welcome & Introductory </h1>
 
-
-
-
-
+<!-- -------------------------------------------------------------------------- -->
 
 
 
@@ -47,32 +47,6 @@ This project serves as a personal learning experience, allowing me to test my ab
 
 My goal was to fully immerse myself in building an ecommerce application, exploring different topics and honing my implementation and integration skills. While efficiency could have been prioritized, the main objective was to gain comprehensive knowledge. -->
 <br><br><br/>
-
-
-
-
-
-
-
-
-
-
-
-### Important points to note:
-<!-- -------------------------------------------------------------------------- -->
-<hr>
-
-
-
-<!-- <li> The project places less emphasis on creating visually stunning designs. Instead, it prioritizes building and refining business logic, implementing functionality, and exploring diverse technologies.
-<br><br>
-<li> The user interface and design maintain a minimalistic and functional approach, allowing a greater focus on learning and development.
-<br><br>
-<li> This project doesn't aim to create a real store with actual products. Instead, the focus is on building business logic and refining development skills, simulating real-world scenarios and mirroring professional work environments.
-<br><br>
-You can see all tickets created & closed here  :   <a href="https://github.com/DevonGifford/Ecommerce_Showcase/issues?q=is%3Aissue+is%3Aclosed">Closed Tickets ✅</a> -->
-
-<br><br/>
 
 
 
@@ -125,6 +99,40 @@ You can see all tickets created & closed here  :   <a href="https://github.com/D
 <!-- CLOSING DIV -->
 </details>
 <br/><br/><br/>
+
+
+
+
+
+
+
+
+
+### Important points to note:
+<!-- -------------------------------------------------------------------------- -->
+<hr>
+
+
+
+<!-- <li> The project places less emphasis on creating visually stunning designs. Instead, it prioritizes building and refining business logic, implementing functionality, and exploring diverse technologies.
+<br><br>
+<li> The user interface and design maintain a minimalistic and functional approach, allowing a greater focus on learning and development.
+<br><br>
+<li> This project doesn't aim to create a real store with actual products. Instead, the focus is on building business logic and refining development skills, simulating real-world scenarios and mirroring professional work environments.
+<br><br>
+You can see all tickets created & closed here  :   <a href="https://github.com/DevonGifford/Ecommerce_Showcase/issues?q=is%3Aissue+is%3Aclosed">Closed Tickets ✅</a> -->
+
+<br><br/>
+
+
+
+
+
+
+
+
+
+
 
 
 
