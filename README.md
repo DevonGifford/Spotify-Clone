@@ -85,7 +85,7 @@ You can see all tickets created & closed here  :   <a href="https://github.com/D
 
 
 
-### The Goals of this project:
+### Key Features of this project:
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
@@ -97,18 +97,28 @@ You can see all tickets created & closed here  :   <a href="https://github.com/D
 <summary> Click here to see all the goals: </summary>
 <br/>
 
+
 <div>
     <ul>
-        <li> 1
-        <li> 2
-        <li> 3
-        <li> 4
-        <li> 5
-        <li> 6
-        <li> 7
-        <li> 8
-        <li> 9
-        <li> 10
+        <li> Song upload
+        <li> Stripe integration
+        <li> Tailwind design for sleek UI
+        <li> Tailwind animations and transition effects
+        <li> Full responsiveness for all devices
+        <li> Credential authentication with Supabase
+        <li> Github authentication integration
+        <li> File and image upload using Supabase storage
+        <li> Client form validation and handling using react-hook-form
+        <li> Server error handling with react-toast
+        <li> Play song audio
+        <li> Favorites system
+        <li> Playlists / Liked songs system
+        <li> Advanced Player component
+        <li> Stripe recurring payment integration
+        <li> Using POST, GET, and DELETE routes in route handlers (app/api)
+        <li> Fetch data with server React components by directly accessing the database (without api)
+        <li> Handling relations between Server and Child components in a real-time environment
+        <li> Cancelling Stripe subscriptions
     </ul> 
 </div>
 
