@@ -1,7 +1,7 @@
 <!-- Introduction Text -->
 <div align="center">
     <h1>Spotify Clone</h1>
-    <h2>(Portfolio Project)<h2>
+    <h4>(Portfolio Project)<h4>
     <h3> 🎯🎯🎯 - insert live-link here -  🎯🎯🎯 </h3>
         <h6>
             built with <a href="https://nextjs.org">Next.js</a> &
