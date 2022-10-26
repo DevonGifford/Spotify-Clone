@@ -11,8 +11,9 @@
 
 <!-- Logo -->
 <p align='center'>
-    <img src="public/assets/github-read-me/SpotifyClone.webp" alt="Demo" title="DemoImage" width="500" height="300">
+    <img src="public/assets/.github/SpotifyClone.webp" alt="Demo" title="DemoImage" width="500" height="300">
 </p>
+
 
 <!-- Tech Used in this Project
 <p align='center'>
