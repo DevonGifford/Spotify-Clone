@@ -296,6 +296,9 @@ test test test test test test test test test test test test test test test test 
 - Used `use client;` to differentiate between server and client rendering.
 
 
+<br/><br/>
+
+
 ### Different Components created
 <hr>
 <!-- container open -->
@@ -304,7 +307,7 @@ If you want a brief description of the different components I have created and w
 
 <details>
 <summary> Click here to expand: </summary>
-<br>
+<br/><br/>
 
 #### layout.tsx File
 
