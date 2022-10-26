@@ -210,6 +210,11 @@ test test test test test test test test test test test test test test test test 
 ### PROJECT SETUP
 <hr/>
 
+<details>
+<summary> Click here to expand: </summary>
+<br/><br/>
+
+
 #### Git Repository Setup
 - Created a new Git repository to track project changes.
 
@@ -259,11 +264,18 @@ test test test test test test test test test test test test test test test test 
 
     ```
 
-<br/><br/>
+<!--  container closed -->
+</details>
+<br/>
 
 
 ### Project Design and Styling
 <hr/>
+
+<details>
+<summary> Click here to expand: </summary>
+<br/><br/>
+
 
 #### Mobile-First Mindset
 - Decided to develop the Spotify clone with a mobile-first approach to ensure optimal user experience across devices.
@@ -281,9 +293,17 @@ test test test test test test test test test test test test test test test test 
 - Utilized the `tailwind-merge` library to achieve custom styling for the sidebar.
 - Implemented the main content section with a dynamic sidebar and library component.
 
+<!--  container closed -->
+</details>
+<br/>
 
 ### Code and Libraries
 <hr/>
+
+<details>
+<summary> Click here to expand: </summary>
+<br/><br/>
+
 
 ##### Technologies Used
 - Utilized functional components for development.
@@ -295,7 +315,8 @@ test test test test test test test test test test test test test test test test 
 - Implemented a mix of server-side and client-side components.
 - Used `use client;` to differentiate between server and client rendering.
 
-
+<!--  container closed -->
+</details>
 <br/><br/>
 
 
