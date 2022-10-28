@@ -324,7 +324,7 @@ test test test test test test test test test test test test test test test test 
 <hr>
 <!-- container open -->
 
-If you want a brief description of the different components I have created and what they do ...
+<em>If you want a brief description of the different components I have created and what they do ... </em>
 
 <details>
 <summary> Click here to expand: </summary>
@@ -387,7 +387,7 @@ The `Library` component represents the user's library in the Spotify clone. It d
 </details>
 <br/>
 
-### Conclusion
+### Conclusion of Project Setup...
 <hr/>
 
  I've been making great progress with the project setup, design, and code implementation. 🚀 <br>
