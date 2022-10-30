@@ -184,20 +184,7 @@ Join me on this behind-the-scenes adventure as I share exciting milestones, chal
 <!-- -------------------------------------------------------------------------- -->
 
 
-## NO. TEMPLATE
-<!-- -------------------------------------------------------------------------- -->
-<hr>
-<!-- SECTION container open -->
-<details>
-<summary> Click here to expand: </summary>
-<br>
 
-test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test 
-
-<!-- SECTION container closed -->
-</details>
-<br/><br/>
-<!-- -------------------------------------------------------------------------- -->
 
 ## 1. PROJECT SETUP & SCAFFOLDING
 <!-- -------------------------------------------------------------------------- -->
@@ -408,15 +395,53 @@ That's a wrap on the initial phase of my developer journal for the Spotify clone
 </em>
 
 
-
-
-
-
-
 <!-- SECTION container closed -->
 </details>
 <br/><br/>
 <!-- -------------------------------------------------------------------------- -->
+
+
+
+
+
+## NO. TEMPLATE 📃
+<hr>
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+### HEADING 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+inset text here
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+
+
+
 
 
 
