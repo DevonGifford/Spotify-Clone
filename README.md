@@ -24,11 +24,6 @@
 <hr> -->
 
 
-
-
-
-
-
 <!-- -------------------------------------------------------------------------- -->
 
 <h1 align='center'> Welcome & Introductory </h1>
@@ -61,7 +56,7 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 
 
 
-### Key Features of this project:
+#### Key Features of this project:
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
@@ -110,7 +105,7 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 
 
 
-### Important points to note:
+#### Important points to note:
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
@@ -140,7 +135,7 @@ You can see all tickets created & closed here  :   <a href="https://github.com/D
 
 
 
-### Demo Image
+#### Demo Image
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
@@ -617,8 +612,14 @@ The `UserProvider` component takes in a children prop, which represents the chil
 
 
 
-## NO. TEMPLATE 📃
+## NO(x). TEMPLATE 📃
 <hr>
+
+### 🔥💻 Developer Journal Entry - {insert title}
+
+text text text
+
+#### For detailed overview of what I did ...
 
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -674,6 +675,17 @@ inset text here
 
 
 
+<!-- -------------------------------------------------------------------------- -->
+
+<h1 align='center'> Forking, Running and Deploying </h1>
+
+<!-- -------------------------------------------------------------------------- -->
+
+<hr>
+<!-- MAIN container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
 
 
 
@@ -788,6 +800,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 <br/><br/>
 
 
+<!-- MAIN container closed -->
+</details>
+<br/><br/>
 
 
 
