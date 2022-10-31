@@ -207,7 +207,7 @@ Now that I've built this solid foundation, the Spotify clone project is ready to
 That's a wrap on the initial phase of my developer journal for the Spotify clone project. Stay tuned for more exciting updates as I continue on this music streaming adventure. You don't want to miss it! ✌🔥
 <em>🎵 EDM beats fades away into the distance...</em>
 
-##### <strong>For detailed overview of what I did - see below:</strong>
+##### For detailed overview of what I did - see below:
 
 
 <!-- SECTION container open -->
@@ -411,21 +411,23 @@ The `Library` component represents the user's library in the Spotify clone. It d
 
 ### 🔥💻 Developer Journal Entry - Supabase & Database Setup 🚀
 
-In this developer journal entry, I totally rocked the Supabase setup and nailed the configuration of the database for Stripe integration and song storage 🎵🔒. I am really impressed with how Supabase made the whole process user-friendly (better than Firebase IMO 🤫). I got those public and private keys locked and loaded, ready for action 🔑.
+In this developer journal entry, I totally rocked the Supabase setup and nailed the configuration of the database for Stripe integration and song storage 🎵🔒. I am really impressed with how Supabase made the whole process user-friendly, what a difference good documentation does <em>(better than Firebase IMO 🤫)</em>. I got those public and private keys locked and loaded, ready for action 🔑.
 
-But wait, there's more! I flexed my database skills by manually setting up the "liked_songs" and "songs" databases like a true database wizard ✨🎩. And of course, I had to add some extra 🔒RLS (Row-Level Security) policies to keep things secure and locked down.
+But wait, there's more! I <strong>flexed my database skills</strong> by manually setting up the "liked_songs" and "songs" databases like a true database wizard ✨🎩. And of course, I had to add some extra 🔒RLS (Row-Level Security) policies to keep things secure and locked down.
 
-To take it up another notch, I created buckets to store songs and images, and added rules and policies to ensure only the right types of files can enter the party 🎧📸. Security on point! 🛡️
+To take it up another notch, I <strong>created buckets</strong> to store songs and images, and added rules and policies to ensure only the right types of files can enter the party 🎧📸. Security on point! 🛡️
 
-But hold up, there's a plot twist! I also whipped up some 🔥 types in the "types.ts" file using Supabase CLI. This brought a whole new level of type safety to the project, keeping everything solid and error-free 💪.
+But hold up, there's a plot twist! I also <strong>whipped up some 🔥 types</strong> in the "types.ts" file using Supabase CLI. This brought a whole new level of type safety to the project, keeping everything solid and error-free 💪.
 
-Now, let's talk about those game-changing providers! I crafted the legendary "SupabaseProvider" which configures Supabase Auth to store user sessions in cookies 🍪 instead of localStorage. This allows the session to travel across the client and server like a boss! And don't forget the "UserProvider" that wraps the user context, granting access to mind-blowing user-related data and authentication state through the epic "useUser" hook 🎮🎉.
+<strong>One major lesson I've learned?</strong> <br/> Hooks in Next.js! 🎣 I dived into the ocean of hooks and discovered their true potential. In this developer entry, I unveiled the power of hooks by creating custom hooks like "useUser." These hooks opened up a world of possibilities and allowed me to harness the power of Supabase authentication and session management effortlessly. It was like wielding a magic wand in the realm of user-related data and authentication state! 🪄✨
 
-In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. 
+Witht the harnessed power of custom hooks like "useUser", I dived into the realm of Supabase authentication and session management. It was like wielding a magic wand, empowering me with seamless access to user sessions and loading status. With the awe-inspiring "MyUserContextProvider" component, I encapsulated user-related data and authentication state, granting the entire application access to the enchanting powers of the "useUser" hook. Brace yourself, Next.js, as I cast more custom hooks into this Spotify clone! 🪄🎣🎮🌟
+
+In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. <br/> Apologies for all the fish/sea puns - custom hooks got me excited.  
 
 Stay tuned for the next thrilling chapter! 🚀🔒💪
 
-##### <strong>For detailed overview of what I did - see below:</strong>
+##### For detailed overview of what I did - see below:
 
 
 <!-- -------------------------------------------------------------------------- -->
