@@ -189,6 +189,27 @@ Join me on this behind-the-scenes adventure as I share exciting milestones, chal
 ## 1. PROJECT SETUP & SCAFFOLDING
 <!-- -------------------------------------------------------------------------- -->
 <hr>
+
+### 🔥💻 Developer Journal Entry - Project Setup 👷‍♂️
+
+ I've been making great progress with the project setup, design, and code implementation. 🚀 <br>
+ I set up Git like a pro and got Next.js fired up with all the necessary dependencies. 💪
+
+I've been all about that <strong>mobile-first mindset</strong>, diving deep into the Spotify home page vibes to gather inspiration. 🎧 <br>
+Identifying those key components and design elements to replicate has been a game-changer, keeping things smooth and steady. 🎯
+
+<strong>Styling and design?</strong> <br>Already on another level! I've unleashed my creativity with global CSS styles to match Spotify's sleek aesthetics. And those reusable components? They're like secret weapons, making the code look sharp and clean. 🔥
+
+<strong>One major lesson I've learned?</strong> <br>Mastering the art of server-side and client-side components. I've been blending them seamlessly, getting the best of both worlds. 🌐
+
+Now that I've built this solid foundation, the Spotify clone project is ready to soar to new heights. 🚀 
+
+That's a wrap on the initial phase of my developer journal for the Spotify clone project. Stay tuned for more exciting updates as I continue on this music streaming adventure. You don't want to miss it! ✌🔥
+<em>🎵 EDM beats fades away into the distance...</em>
+
+<strong>For detailed overview of what I did - see below:</strong>
+
+
 <!-- SECTION container open -->
 <details>
 <summary> Click here to expand: </summary>
@@ -374,25 +395,7 @@ The `Library` component represents the user's library in the Spotify clone. It d
 </details>
 <br/>
 
-### Conclusion of Project Setup...
-<hr/>
 
- I've been making great progress with the project setup, design, and code implementation. 🚀 <br>
- I set up Git like a pro and got Next.js fired up with all the necessary dependencies. 💪
-
-I've been all about that <strong>mobile-first mindset</strong>, diving deep into the Spotify home page vibes to gather inspiration. 🎧 <br>
-Identifying those key components and design elements to replicate has been a game-changer, keeping things smooth and steady. 🎯
-
-<strong>Styling and design?</strong> <br>Already on another level! I've unleashed my creativity with global CSS styles to match Spotify's sleek aesthetics. And those reusable components? They're like secret weapons, making the code look sharp and clean. 🔥
-
-<strong>One major lesson I've learned?</strong> <br>Mastering the art of server-side and client-side components. I've been blending them seamlessly, getting the best of both worlds. 🌐
-
-Now that I've built this solid foundation, the Spotify clone project is ready to soar to new heights. 🚀 
-
-That's a wrap on the initial phase of my developer journal for the Spotify clone project. Stay tuned for more exciting updates as I continue on this music streaming adventure. You don't want to miss it! ✌🔥
-
-<em>🎵 EDM beats fades away into the distance...
-</em>
 
 
 <!-- SECTION container closed -->
@@ -401,6 +404,214 @@ That's a wrap on the initial phase of my developer journal for the Spotify clone
 <!-- -------------------------------------------------------------------------- -->
 
 
+
+
+## 2. SUPABASE & DATABASE SETUP & CREATING PROVIDERS
+<hr>
+
+### 🔥💻 Developer Journal Entry - Supabase & Database Setup 🚀
+
+In this developer journal entry, I totally rocked the Supabase setup and nailed the configuration of the database for Stripe integration and song storage 🎵🔒. I am really impressed with how Supabase made the whole process user-friendly (better than Firebase IMO 🤫). I got those public and private keys locked and loaded, ready for action 🔑.
+
+But wait, there's more! I flexed my database skills by manually setting up the "liked_songs" and "songs" databases like a true database wizard ✨🎩. And of course, I had to add some extra 🔒RLS (Row-Level Security) policies to keep things secure and locked down.
+
+To take it up another notch, I created buckets to store songs and images, and added rules and policies to ensure only the right types of files can enter the party 🎧📸. Security on point! 🛡️
+
+But hold up, there's a plot twist! I also whipped up some 🔥 types in the "types.ts" file using Supabase CLI. This brought a whole new level of type safety to the project, keeping everything solid and error-free 💪.
+
+Now, let's talk about those game-changing providers! I crafted the legendary "SupabaseProvider" which configures Supabase Auth to store user sessions in cookies 🍪 instead of localStorage. This allows the session to travel across the client and server like a boss! And don't forget the "UserProvider" that wraps the user context, granting access to mind-blowing user-related data and authentication state through the epic "useUser" hook 🎮🎉.
+
+In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. 
+
+Stay tuned for the next thrilling chapter! 🚀🔒💪
+
+<strong>For detailed overview of what I did - see below:</strong>
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+### Seting Up SuperBase and DataBase
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+#### created superbase account 
+really impresse with this 
+far more user friendly than firebase 
+
+- got the public, private keys
+
+
+#### setup database for stripe
+- supabase has a greate feature to help you write a script to create the perfect database for stripe
+
+
+#### setup database for songs
+manually set up the database's for
+- `liked_songs` 
+- `songs`
+
+
+#### created RLS policies for the databases
+
+#### For the `song` database:
+-  Enabled read access for all users
+-  Enabled insert access for authenticated users only
+  
+```
+CREATE POLICY "Enable insert for authenticated users only" ON "public"."songs"
+AS PERMISSIVE FOR INSERT
+TO authenticated
+
+WITH CHECK (true)
+```
+
+#### For the `liked_songs` database:
+- Enabled read access for all users
+
+```
+CREATE POLICY "Enable read access for all users" ON "public"."liked_songs"
+AS PERMISSIVE FOR SELECT
+TO public
+USING (true)
+```
+- Enabled read access for all users
+```
+CREATE POLICY "policy_name"
+ON public.liked_songs
+FOR INSERT 
+TO authenticated 
+WITH CHECK (true);
+```
+- Enable delete for users based on user_id
+```
+CREATE POLICY "policy_name"
+ON public.liked_songs
+FOR DELETE USING (
+  auth.uid() = user_id
+);
+```
+
+
+#### created buckets to store songs & images
+- creating rules to restrict to only certain type of files
+- creating policies to protect the buckets
+
+
+#### Creating types for SupaBase
+
+[Generating types using Supabase CLI documentation](https://supabase.com/docs/guides/api/rest/generating-types)
+
+
+```npm i supabase@">=1.8.1" --save-dev```
+
+- generating a login key
+
+- loggin in via CLI
+
+- Then running the following to generate `types_db.ts` 
+
+```
+npx supabase gen types typescript --project-id INSERT_PROJ_ID_HERE --schema public > types_db.ts
+```
+
+This created a `typed_db.ts` file in the project and that will help alot with type saftey 
+
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+
+### Creating Providers for Auth & SupaBase
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+#### created Supabase Provider
+
+-  created providers folder, this will come in handy later for variouse reasons
+-  created `SupabaseProvider.tsx`
+
+Documentation: 
+
+[createClientComponentClient](https://supabase.com/docs/guides/auth/auth-helpers/nextjs)
+
+```
+configures Supabase Auth to store the user's session in a cookie, rather than localStorage. This makes it available across the client and server of the App Router - Client Components, Server Components, Server Actions, Route Handlers and Middleware. The session is automatically sent along with any requests to Supabase.
+```
+
+[SessionContextProvider](https://supabase.com/docs/guides/auth/auth-helpers/nextjs-pages)
+
+```
+This submodule provides convenience helpers for implementing user authentication in Next.js applications using the pages directory.
+```
+
+The SupabaseProvider.tsx component is responsible for setting up the Supabase client and providing it to the application. It uses the createClientComponentClient function from the @supabase/auth-helpers-nextjs package to create the Supabase client instance. The component wraps the application's children with the SessionContextProvider from the @supabase/auth-helpers-react package, passing the Supabase client as a prop. This allows the application to access the Supabase client and manage user authentication and session state throughout the application.
+
+#### created types.tsx 
+
+To assist with the useUser hooks I am going to create a type file, called `types.ts` in the root of the application 
+
+The types.tsx file contains a collection of TypeScript interfaces that define the data structures used in the project. These interfaces represent various entities such as songs, products, prices, customers, user details, product with price, and subscriptions. They provide a structured way to define and work with these data types, making it easier to handle and manage data throughout the application. The file serves as a central location for defining and importing these interfaces, ensuring consistent and type-safe data usage across the project.
+
+##### in the layout.tsx
+
+Now we can wrap the `<Sidebar>` & `{children}` with the newly created `SupaBaseProvider`
+
+This is how we give our application access to client-superbase
+
+
+#### Created useUser Hook
+
+- created hooks folder, I will have to create many hooks 
+- created `useUser.tsx`
+
+The `useUser.tsx` file contains a custom hook (`useUser`) and a context provider `MyUserContextProvider` for managing user-related data and authentication state.
+
+The `MyUserContextProvider` component sets up the user context using the `createContext` function from React. 
+
+It retrieves the user session, loading status, and Supabase client using the `useSessionContext` and `useSupaUser` hooks from the `@supabase/auth-helpers-react package`.
+It also defines state variables for user details and subscription information.
+
+The component uses `useEffect` to fetch the user details and subscription data from the Supabase database. It makes use of the Supabase client to perform the necessary queries and updates the corresponding state variables accordingly.
+
+The useUser hook allows components to access the user context and retrieve the user-related data. It throws an error if used outside the `MyUserContextProvider` context.
+
+Overall, these components provide a convenient way to manage user authentication and retrieve user details and subscription information in a Supabase-powered application.
+
+#### Created userProvider
+
+- created in the providers folder
+- used this in the `layout.tsx` and wrapped around the `<Sidebar>` & `{children}`
+
+The purpose of the `UserProvider` component is to provide the user context to its child components, allowing them to access user-related data and authentication state through the useUser hook.<br>
+By using the `UserProvider` component in the application's component hierarchy (`layout.tsx`), the child components can benefit from the user context and utilize the user-related functionality provided by the useUser hook.
+
+The UserProvider.tsx file exports a component called `UserProvider` that wraps the `MyUserContextProvider` from the useUser hook. It sets up the user context and provides it to the child components.<br>
+The `UserProvider` component takes in a children prop, which represents the child components that will be wrapped within the user context. It renders the `MyUserContextProvider` component and passes the children prop as its children.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
 
 
 
@@ -452,9 +663,6 @@ inset text here
 <!-- -------------------------------------------------------------------------- -->
 
 <br/><br/><br/><br/>
-
-
-
 
 
 
