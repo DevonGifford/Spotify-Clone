@@ -207,7 +207,7 @@ Now that I've built this solid foundation, the Spotify clone project is ready to
 That's a wrap on the initial phase of my developer journal for the Spotify clone project. Stay tuned for more exciting updates as I continue on this music streaming adventure. You don't want to miss it! ✌🔥
 <em>🎵 EDM beats fades away into the distance...</em>
 
-<strong>For detailed overview of what I did - see below:</strong>
+##### <strong>For detailed overview of what I did - see below:</strong>
 
 
 <!-- SECTION container open -->
@@ -425,7 +425,7 @@ In conclusion, this developer journal entry has taken us on a journey of Supabas
 
 Stay tuned for the next thrilling chapter! 🚀🔒💪
 
-<strong>For detailed overview of what I did - see below:</strong>
+##### <strong>For detailed overview of what I did - see below:</strong>
 
 
 <!-- -------------------------------------------------------------------------- -->
