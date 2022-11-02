@@ -41,16 +41,7 @@
 This project serves as a personal learning experience, allowing me to test my abilities in seeing a project through from start to finish. Rather than replicating existing stores, the focus is on developing robust business logic and integrating various technologies.
 
 My goal was to fully immerse myself in building an ecommerce application, exploring different topics and honing my implementation and integration skills. While efficiency could have been prioritized, the main objective was to gain comprehensive knowledge. -->
-<br><br><br/>
-
-
-
-
-
-
-
-
-
+<br>
 
 
 
@@ -93,13 +84,6 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 <br/>
 
 
-
-
-
-
-
-
-
 #### Important points to note:
 <!-- -------------------------------------------------------------------------- -->
 <hr>
@@ -115,15 +99,6 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 You can see all tickets created & closed here  :   <a href="https://github.com/DevonGifford/Ecommerce_Showcase/issues?q=is%3Aissue+is%3Aclosed">Closed Tickets ✅</a> -->
 
 <br><br>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -379,17 +354,14 @@ The `Library` component represents the user's library in the Spotify clone. It d
 
 In this developer journal entry, I totally rocked the Supabase setup and nailed the configuration of the database for Stripe integration and song storage 🎵🔒. I am really impressed with how Supabase made the whole process user-friendly, what a difference good documentation does <em>(better than Firebase IMO 🤫)</em>. I got those public and private keys locked and loaded, ready for action 🔑.
 
-But wait, there's more! I <strong>flexed my database skills</strong> by manually setting up the "liked_songs" and "songs" databases like a true database wizard ✨🎩. And of course, I had to add some extra 🔒RLS (Row-Level Security) policies to keep things secure and locked down.
-
-To take it up another notch, I <strong>created buckets</strong> to store songs and images, and added rules and policies to ensure only the right types of files can enter the party 🎧📸. Security on point! 🛡️
-
+But wait, there's more! I <strong>flexed my database skills</strong> by manually setting up the "liked_songs" and "songs" databases like a true database wizard ✨🎩. And of course, I had to add some extra 🔒RLS (Row-Level Security) policies to keep things secure and locked down. </br> To take it up another notch, I <strong>created buckets</strong> to store songs and images, and added rules and policies to ensure only the right types of files can enter the party 🎧📸. Security on point! 🛡️ <br/>
 But hold up, there's a plot twist! I also <strong>whipped up some 🔥 types</strong> in the "types.ts" file using Supabase CLI. This brought a whole new level of type safety to the project, keeping everything solid and error-free 💪.
 
 <strong>One major lesson I've learned?</strong> <br/> Hooks in Next.js! 🎣 I dived into the ocean of hooks and discovered their true potential. In this developer entry, I unveiled the power of hooks by creating custom hooks like "useUser." These hooks opened up a world of possibilities and allowed me to harness the power of Supabase authentication and session management effortlessly. It was like wielding a magic wand in the realm of user-related data and authentication state! 🪄✨
 
 Witht the harnessed power of custom hooks like "useUser", I dived into the realm of Supabase authentication and session management. It was like wielding a magic wand, empowering me with seamless access to user sessions and loading status. With the awe-inspiring "MyUserContextProvider" component, I encapsulated user-related data and authentication state, granting the entire application access to the enchanting powers of the "useUser" hook. Brace yourself, Next.js, as I cast more custom hooks into this Spotify clone! 🪄🎣🎮🌟
 
-In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. <br/> Apologies for all the fish/sea puns - custom hooks got me excited.  
+In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. Apologies for all the fish/sea puns - custom hooks got me excited. 😅  
 
 Stay tuned for the next thrilling chapter! 🚀🔒💪
 
@@ -621,9 +593,6 @@ inset text here
 </details>
 <br/><br/>
 <!-- -------------------------------------------------------------------------- -->
-
-
-
 
 
 
