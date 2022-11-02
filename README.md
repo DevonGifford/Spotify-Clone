@@ -139,7 +139,7 @@ Join me on this behind-the-scenes adventure as I share exciting milestones, chal
 I've been all about that <strong>mobile-first mindset</strong>, diving deep into the Spotify home page vibes to gather inspiration. 🎧 <br>
 Identifying those key components and design elements to replicate has been a game-changer, keeping things smooth and steady. 🎯
 
-<strong>Styling and design?</strong> <br>Already on another level! I've unleashed my creativity with global CSS styles to match Spotify's sleek aesthetics. And those reusable components? They're like secret weapons, making the code look sharp and clean. 🔥
+<strong>Styling and design?</strong> <br>Already on another level! I've unleashed my creativity with tailwind-merge and reusable components. They're like secret weapons, making the code look sharp and clean, perfect to match Spotify's sleek aesthetics.🔥
 
 <strong>One major lesson I've learned?</strong> <br>Mastering the art of server-side and client-side components. I've been blending them seamlessly, getting the best of both worlds. 🌐
 
@@ -357,11 +357,11 @@ In this developer journal entry, I totally rocked the Supabase setup and nailed 
 But wait, there's more! I <strong>flexed my database skills</strong> by manually setting up the "liked_songs" and "songs" databases like a true database wizard ✨🎩. And of course, I had to add some extra 🔒RLS (Row-Level Security) policies to keep things secure and locked down. </br> To take it up another notch, I <strong>created buckets</strong> to store songs and images, and added rules and policies to ensure only the right types of files can enter the party 🎧📸. Security on point! 🛡️ <br/>
 But hold up, there's a plot twist! I also <strong>whipped up some 🔥 types</strong> in the "types.ts" file using Supabase CLI. This brought a whole new level of type safety to the project, keeping everything solid and error-free 💪.
 
-<strong>One major lesson I've learned?</strong> <br/> Hooks in Next.js! 🎣 I dived into the ocean of hooks and discovered their true potential. In this developer entry, I unveiled the power of hooks by creating custom hooks like "useUser." These hooks opened up a world of possibilities and allowed me to harness the power of Supabase authentication and session management effortlessly. It was like wielding a magic wand in the realm of user-related data and authentication state! 🪄✨
+<strong>One major lesson I've learned?</strong> <br/> Hooks in Next.js! 🎣 I dived into the ocean of hooks and discovered their true potential. I unveiled the power of hooks by creating custom hooks like "useUser." These hooks opened up a world of possibilities and allowed me to harness the power of Supabase authentication and session management effortlessly. It was like wielding a magic wand in the realm of user-related data and authentication state! 🪄✨
 
-Witht the harnessed power of custom hooks like "useUser", I dived into the realm of Supabase authentication and session management. It was like wielding a magic wand, empowering me with seamless access to user sessions and loading status. With the awe-inspiring "MyUserContextProvider" component, I encapsulated user-related data and authentication state, granting the entire application access to the enchanting powers of the "useUser" hook. Brace yourself, Next.js, as I cast more custom hooks into this Spotify clone! 🪄🎣🎮🌟
+I encapsulated user-related data and authentication state, granting the entire application access to the enchanting powers of the "useUser" hook. Brace yourself, Next.js, as I cast more custom hooks into this Spotify clone! 🪄🎣🎮🌟
 
-In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. Apologies for all the fish/sea puns - custom hooks got me excited. 😅  
+In conclusion, this developer journal entry has taken us on a journey of Supabase setup, database magic, type sorcery, and provider mastery. We've built a rock-solid foundation for a secure and feature-packed application powered by Supabase. Apologies for all the fish/sea puns - power of custom hooks got me hooked. 🎣😅  
 
 Stay tuned for the next thrilling chapter! 🚀🔒💪
 
