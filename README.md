@@ -36,8 +36,6 @@
 <!-- -------------------------------------------------------------------------- -->
 <hr/>
 
-
-
 <!-- Welcome to my Ecommerce Project Repository, a portfolio project of mine!
 
 This project serves as a personal learning experience, allowing me to test my abilities in seeing a project through from start to finish. Rather than replicating existing stores, the focus is on developing robust business logic and integrating various technologies.
@@ -60,12 +58,9 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
-<br>
-
-
 <!-- Small container -->
 <details>
-<summary> Click here to see all the goals: </summary>
+<summary> Click here to see all the features: </summary>
 <br/>
 
 
@@ -95,7 +90,7 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 
 <!-- CLOSING DIV -->
 </details>
-<br/><br/><br/>
+<br/>
 
 
 
@@ -119,32 +114,8 @@ My goal was to fully immerse myself in building an ecommerce application, explor
 <br><br>
 You can see all tickets created & closed here  :   <a href="https://github.com/DevonGifford/Ecommerce_Showcase/issues?q=is%3Aissue+is%3Aclosed">Closed Tickets ✅</a> -->
 
-<br><br/>
+<br><br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### Demo Image
-<!-- -------------------------------------------------------------------------- -->
-<hr>
-
-<!-- Demo Image 🎯🎯🎯 -->
-<!-- <p align='center'>
-    <img src="public/assets/PortfolioDemoDevon.png" alt="Demo" title="DemoImage" width="650" height="650">
-</p> -->
-
-<br><br><br>
 
 
 
