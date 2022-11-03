@@ -555,6 +555,381 @@ The `UserProvider` component takes in a children prop, which represents the chil
 
 
 
+## 3. AUTHENTICATION MODAL & FUNCTIONALITY
+<hr>
+
+### 🔥💻 Developer Journal Entry - Authentication modal & Functionality 
+
+In this epic developer journal entry, I unleashed a plethora of new features, taking this project to new heights of user delight! 🚀💥
+
+First and foremost, I dropped a 🔥 <strong>authentication modal functionality bomb</strong>, empowering users to effortlessly log in, log out, create accounts, reset passwords, and even receive magical links for instant access.
+This turbocharges the user experience and fortifies the app's security like a fortress! 🔒🏰
+<br>
+To supercharge the authentication process, I harnessed the power of Supabase and its stunning authentication UI, enabling users to sign in with a single click using their GitHub credentials! 
+<br>
+Talk about <strong>seamless user registration</strong> and <strong>rock-solid trustworthiness!</strong> ⚡💪
+
+Not stopping there, I summoned the mystical powers of Radix UI components, infusing the Spotify clone with an otherworldly interface that's both visually <strong>stunning and effortlessly accessible</strong>. With Radix UI's flexible and modular components, I molded a design system that's as adaptable as a shape-shifting ninja, ready to conquer any design challenge that comes its way! 🐱‍👤✨
+
+But wait, there's more! I harnessed the enchanting spells of the react-hot-toast library, conjuring up mesmerizing and customizable notifications. With these sublime toast notifications, I'm able to deliver important messages to users with style and grace, like a magical messenger from the digital realms! 🧙‍♂️🌟
+
+In conclusion, these new features have transformed the Spotify clone into an absolute legend of an application! The authentication modal, Supabase integration, Radix UI components, and toast notifications have combined forces to create an unrivaled user experience that will leave users in awe and begging for an encore! 🎶🔥 
+
+With these mystical enhancements, the Spotify clone is now primed to deliver an epic music streaming experience that will rock users' worlds like a legendary stadium concert! 🎸🔥
+
+#### For detailed overview of what I did ...
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+### Goals accomplished:
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+During this development phase, I successfully implemented the following user authentication functionalities:
+
+- Login and logout capabilities
+- Account creation
+- Password reset functionality
+- Magic link sending feature
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+### Deatailed look at all the steps I took: 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+#### 1.  Creating `ModalProvider` Skeleton
+
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+    1.  using the `"use cilent;"`
+    2.  using a useEffect trick so that we dont have rehydration issues in server components  
+    3.  placing above `<Sidebar>` & `{children}` - selfclosing 
+
+<!-- small section closed -->
+</details>
+<br/><br/>
+
+#### 2.  Creating `Modal.tsx` component using Radix-ui Library 
+
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+   
+<strong>What is radix?</strong>
+
+[Radix](https://www.radix-ui.com/)
+>An open-source UI component library for building high-quality, accessible design systems and web apps.<br>Low-level UI component library with a focus on accessibility, customization and developer experience. You can use these components either as the base layer of your design system, or adopt them incrementally. <br>Each primitive can be installed individually so you can adopt them incrementally.
+
+1.  created the skeleton
+
+2.  In this project, specifcally the newly created `Modal.tsx` I will be using:
+
+    ```npm install @radix-ui/react-dialog```
+    and importing everything using 
+    ```import * as Dialog from "@radix-ui/react-dialog"```
+
+3.  I defined the interface for the ModalProps, specifying the prop types required for the Modal component.
+
+4.  I created the Modal functional component, accepting the props passed to it
+
+5.  Inside the component, I wrapped the content with the `Dialog.Root` component, providing the open and onOpenChange props to control the visibility of the modal.
+
+6.  Within the `Dialog.Root`, I used `Dialog.Portal` to render the modal content as a sibling of the root of the React tree, ensuring it overlayed the other elements.
+
+7.  I structured the modal content using `Dialog.Content`,` Dialog.Title`, `Dialog.Description`, and any additional child components passed to the Modal component.
+
+8.  I added the close button using `Dialog.Close` and a button element, providing the necessary styles and an aria-label for accessibility
+
+9. Obviously in the `ModalProvider` I am using some dummy information 
+    ```
+    <Modal
+      title="Test Modal"    
+      description='Test Description'
+      isOpen
+      onChange={() => {}}
+    >
+        This is where the children will be rendered
+    </Modal>
+    ```
+
+<!-- small section closed -->
+</details>
+<br/><br/>
+
+#### 3.  Creating new `useAuthModal.ts` hook with Zustand library 
+
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+<strong>What is zustand?</strong>
+
+[Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
+>A small, fast, and scalable bearbones state management solution. Zustand has a comfy API based on hooks. It isn't boilerplatey or opinionated, but has enough convention to be explicit and flux-like.<br><br>Zustand is perfect for this little project, obviously the real spotfiy uses Redux however I have already spent a fair amount of time using redux and would like to learn about this super light weight state management tool. <br><br>  Beyond that reason Zustand is great for; Simplicity and Ease of Use, Performance & Bundle size, Simpler to setup and configure.
+
+leveraged Zustand to create a custom store for managing the state of the AuthModal component. The store effectively handled the modal's visibility and provided functions to control its opening and closing. By exporting the `useAuthModal` hook, other components could effortlessly tap into the store's state and actions.
+
+1.  I imported the create function from the zustand library. This allowed me to create a custom store with state and actions.
+```
+npm i zustand
+```
+
+1.  Created the `interface AuthModalStore` to shape the state of the store. It included a boolean property isOpen to track the visibility of the modal and two functions `onOpen` and `onClose` to control its opening and closing.
+
+2.  I used the `create` function to create the `useAuthModal` hook. 
+Within the callback function passed to create, I defined the initial state and actions for the store. 
+Set the initial value of isOpen to false and implemented the onOpen and onClose functions to update the state accordingly.
+
+3.  Lastly, I exported the `useAuthModal` hook, allowing other components to import and utilize it to access the state and actions defined in the store.
+
+4.  Finally updated the `ModalProvider`, where I was using dummy data and replaced it with this new `useAuthModal`
+
+5.  Now that the skeleton is complete, we can add some actual funcitonality, first I installed the relvant packages to link to my supabase 
+    1. ```npm i @supabase/auth-ui-react```
+    2. ```npm i @supabase/auth-ui-shared```
+
+6.  Following the [supabase documentation](https://supabase.com/docs) I created some constants:
+
+    ```
+    const router = useRouter();
+    const { session } = useSessionContext();
+    const supabaseClient = useSupabaseClient();
+    ```ts
+    - obviously have the relevant imports for functionality 
+    - now I can create the supabase `<auth>`
+
+7. Created and styled the supabase auth
+   - imported the relevant requirements
+    ```ts
+    import { Auth } from "@supabase/auth-ui-react";
+    import { ThemeSupa } from "@supabase/auth-ui-shared";
+    ```
+    - in my render I added the `<Auth>` with some styling
+    ```ts
+    <Auth
+    supabaseClient={supabaseClient}
+    providers={['github']}
+    magicLink={true}
+    appearance={{
+    theme: ThemeSupa,
+    variables: {
+        default: {
+        colors: {
+            brand: '#404040',
+            brandAccent: '#22c55e'
+        }
+        }
+    }
+    }}
+    theme="dark"
+/>
+    ```
+
+8.  Importing the `AuthModal` file and 
+    -  imported the const and deconstructed the `onClose` & `onOpen`
+    -  also added the `onChange` function, as a skeleton for now...
+    ```ts
+    const {onClose, isOpen} =  useAuthModal();
+    const onChange = (open: boolean) => {
+        if (!open) {
+            onClose();
+        }
+    }
+    ```
+    - updated the `<Auth>` to use the above...
+
+
+9.  Adding functionality to the `header` componenet, to open the log-in and sign-up pages
+    -  importing the relavant files
+    ```ts
+    const authModal = useAuthModal();
+    ```
+    - updating the buttons onClick to open ie -> `onClick={authModal.onOpen}`
+    
+10.  Adding a useEffect ot the `AuthModal` to handle the closing of the Modal once the user successfully signs-in or signs-up 
+    ```ts
+      useEffect(() => {
+        if (session) {
+        router.refresh();
+        onClose();
+        }
+    }, [session, router, onClose]);
+    ```
+    - TESTING THE SIGN UP AND IT WORKS (email and password)
+
+<!-- small section closed -->
+</details>
+<br/><br/>
+
+
+#### 4.  Setting up GitHub Authentication - quick sign in 
+
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1.  Setting up GitHub OAuth 
+    1.  in profile -> settings -> developer settings -> OAuth
+    2.  adding localhost
+    3.  getting the public and secret key
+    4.  REMEMBER TO ADD LIVE SITE HERE FUTURE DEVON
+   
+2. Linking the GitHub OAuth to our SupaBase
+   1. in profile -> settings -> authentication -> profiles ...
+   2. add the public and secret key
+
+3. Testing and it works 😁
+
+Please future Devon don't forget to add the livesite URL to our github OAUTH 😜
+
+<!-- small section closed -->
+</details>
+<br/><br/>
+
+
+#### 5.  Updating header to render differently depending on sign-in status   
+
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1.  Updating the header with the following constants and relevant imports 
+    ```ts
+    const supabaseClient = useSupabaseClient();
+    const { user } = useUser();
+    ```
+
+2.  Creating a handler for the Logout 
+    ```ts
+    const handleLogout = async () => {
+    const { error } = await supabaseCllient.auth.signOut();
+    //TODO: Reset any playing songs - once user signs out - songs should stop playing
+    router.refresh();
+
+    if (error) {
+        console.log(error);
+        
+    }
+    ```
+
+3.  Updating the render to use a ternary to render according to `user`
+    1.  created buttons and styled them, to render if the user is logged-in
+
+4.  Testing and it works !
+
+<!-- small section closed -->
+</details>
+<br/><br/>
+
+
+#### 6.  Creating Beautiful notifcations with Hot Toast
+
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+<strong>What is Hot-Toast?</strong>
+
+[HOT-TOAST](https://react-hot-toast.com/docs)
+>A library that provides a simple and customizable toast notification system for React applications. It allows developers to display temporary messages or notifications to users in a visually appealing and non-intrusive manner.<br/><br/> Some benefits of using react-hot-toast include its lightweight size, ease of use, and the ability to customize the appearance and behavior of the toast notifications. <br/><br/>It also provides convenient features like stacking multiple toasts, controlling their duration, and handling various types of notifications, making it a powerful tool for enhancing the user experience in React applications.
+
+
+1. First I created the `ToasterProvider.tsx`:
+   1. I imported the necessary dependencies, including the Toaster component from the react-hot-toast library.
+
+   2. Inside the component, I defined the ToasterProvider function.
+   
+   3. Within the function, I returned the Toaster component and passed the toastOptions prop to customize the appearance of the toast messages.
+   
+   4. The toastOptions prop allowed me to set the background color to #333 and the text color to #fff.
+   
+   5. Finally, I exported the ToasterProvider component so that it can be used throughout the application to provide toast notifications with the defined styling.
+
+2. Adding the `<ToasterProvider />` to the `layout.tsx`
+   
+3. Back in the `Header`  component 
+   ```ts
+   import { toast } from "react-hot-toast";
+   ```
+   -  In the logout handler amending the error message to use toats instead 
+    ```ts
+    toast.error(error.message);
+    ```
+<!-- small section closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+### Libraries added  
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+<strong>What is Hot-Toast?</strong>
+
+[HOT-TOAST](https://react-hot-toast.com/docs)
+>A library that provides a simple and customizable toast notification system for React applications. It allows developers to display temporary messages or notifications to users in a visually appealing and non-intrusive manner.<br/><br/> Some benefits of using react-hot-toast include its lightweight size, ease of use, and the ability to customize the appearance and behavior of the toast notifications. <br/><br/>It also provides convenient features like stacking multiple toasts, controlling their duration, and handling various types of notifications, making it a powerful tool for enhancing the user experience in React applications.
+
+<br/><br/>
+
+<strong>What is zustand?</strong>
+
+[Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
+>A small, fast, and scalable bearbones state management solution. Zustand has a comfy API based on hooks. It isn't boilerplatey or opinionated, but has enough convention to be explicit and flux-like.<br><br>Zustand is perfect for this little project, obviously the real spotfiy uses Redux however I have already spent a fair amount of time using redux and would like to learn about this super light weight state management tool. <br><br>  Beyond that reason Zustand is great for; Simplicity and Ease of Use, Performance & Bundle size, Simpler to setup and configure.
+
+<br/><br/>
+
+<strong>What is radix?</strong>
+
+[Radix](https://www.radix-ui.com/)
+>An open-source UI component library for building high-quality, accessible design systems and web apps.<br>Low-level UI component library with a focus on accessibility, customization and developer experience. You can use these components either as the base layer of your design system, or adopt them incrementally. <br>Each primitive can be installed individually so you can adopt them incrementally.
+
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
 ## NO(x). TEMPLATE 📃
 <hr>
 
