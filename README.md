@@ -148,7 +148,7 @@ Now that I've built this solid foundation, the Spotify clone project is ready to
 That's a wrap on the initial phase of my developer journal for the Spotify clone project. Stay tuned for more exciting updates as I continue on this music streaming adventure. You don't want to miss it! ✌🔥
 <em>🎵 EDM beats fades away into the distance...</em>
 
-#### For detailed overview of what I did ...
+### For detailed overview of what I did ...
 
 
 <!-- SECTION container open -->
@@ -365,7 +365,7 @@ In conclusion, this developer journal entry has taken us on a journey of Supabas
 
 Stay tuned for the next thrilling chapter! 🚀🔒💪
 
-#### For detailed overview of what I did ...
+### For detailed overview of what I did ...
 
 
 <!-- -------------------------------------------------------------------------- -->
@@ -577,7 +577,7 @@ In conclusion, these new features have transformed the Spotify clone into an abs
 
 With these mystical enhancements, the Spotify clone is now primed to deliver an epic music streaming experience that will rock users' worlds like a legendary stadium concert! 🎸🔥
 
-#### For detailed overview of what I did ...
+### For detailed overview of what I did ...
 
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -937,7 +937,7 @@ Please future Devon don't forget to add the livesite URL to our github OAUTH �
 
 text text text
 
-#### For detailed overview of what I did ...
+### For detailed overview of what I did ...
 
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
