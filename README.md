@@ -929,6 +929,351 @@ Please future Devon don't forget to add the livesite URL to our github OAUTH �
 <br/><br/>
 <!-- -------------------------------------------------------------------------- -->
 
+## 4. Upload modal & Functionality
+<hr>
+
+### 🔥💻 Developer Journal Entry - {insert title}
+
+I accomplished some essential goals that took this project to the next level! 💥
+
+First, I created a mind-blowing modal for uploading songs to Supabase storage and syncing it with our database. 🎵 This feature delivers an out-of-this-world user experience, providing a slick and intuitive way for users to share their musical creations and elevate our app's vibe. 🎶📤
+
+To <strong>safeguard the precious data</strong>, I implemented 🔒 authentication checks that are tighter than a drumbeat. Only the chosen ones with valid credentials can access the upload functionality, ensuring top-notch data security and keeping those sneaky trolls out! 🙅‍♂️🔐
+
+With the power of the rad react-hook-form library, I transformed the mundane task of form handling into a hyper-efficient process. 💪✨ Our users now enjoy seamless form validation and submission, creating a <strong>smooth and error-free experience</strong>. No more facepalms! 🙌🎯
+
+The feedback game is looking great with those sizzling-hot toast notifications. 🍞🔥 Users get <strong>instant visual cues</strong> on their actions, it's all about providing that smooth flow and keeping everyone in sync! 📢💃
+
+And let's not forget the <strong>eye-catching aesthetics!</strong> 😎🎨 By harnessing the magic of Tailwind CSS classes with the help of tailwind-merge, I styled and customized our Input component like a true design maestro. 🎨✨🎛️
+
+This epic journey pushed my skills to new heights, honing my problem-solving prowess and deepening my understanding of cutting-edge technologies. 🚀💪 I'm stoked about the progress made and excited to continue iterating and refining this project in collaboration with an amazing team. Let's take it to infinity and beyond! 🚀🌌
+
+
+
+### For detailed overview of what I did ...
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+### Goals Accomplished 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. <strong>Created a modal for uploading songs to Supabase storage and creating a new record in the database.</strong>
+   - Enhanced user experience by providing a convenient and intuitive way to upload songs, enriching the application's content and functionality.
+<br/><br/>
+2. <strong>Protected the upload modal on the frontend by checking authentication before granting permission to upload.</strong>
+   - Ensured that only authenticated users could access the upload functionality, maintaining data security and preventing unauthorized use of the feature.
+<br/><br/>
+3. <strong>Implemented form handling, validation, and submission using react-hook-form.
+   - Streamlined the form management</strong> process, enhanced data validation, and provided a smoother and more interactive user experience when submitting song details.
+<br/><br/>
+4. <strong>Integrated toast notifications using react-hot-toast for displaying success and error messages.</strong>
+   - Improved user feedback by visually notifying users about the outcome of form submissions, enhancing the overall user experience and providing a clear understanding of the upload process.
+<br/><br/>
+5. <strong>Utilized Tailwind CSS classes with the help of tailwind-merge to style and customize the Input component.</strong>
+   - Enabled consistent and visually appealing styling of input elements, enhancing the overall aesthetics and user interface of the application.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+
+### Deatailed look at all the steps I took:
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+
+
+
+####  updating the  `library.tsx`
+<hr>
+<!-- step open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+```ts
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
+```
+
+create const for the new imports
+
+
+creading onclick handler 
+    -  if user not signed in - open the sign-in page
+
+
+
+<!-- step closed -->
+</details>
+<br/><br/>
+
+#### created `@/hooks/useUploadModal.ts`
+<hr>
+
+<!-- step open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+ - I imported the create function from the zustand library to create a custom store for managing the state of the UploadModal component.
+
+ - I defined the UploadModalStore interface to shape the state of the store, including a boolean property isOpen to track the visibility of the modal, and two functions onOpen and onClose to control its opening and closing.
+
+ - I used the create function to create the useUploadModal hook. Within the callback function passed to create, I defined the initial state and actions for the store. I set the initial value of isOpen to false and implemented the onOpen and onClose functions to update the state accordingly.
+
+ - Finally, I exported the useUploadModal hook, allowing other components to import and utilize it to access the state and actions defined in the store.
+
+Followed by importing and defining this new hook in the library.tsx
+```ts
+const uploadModal = useUploadModal();
+```
+
+adding a return to the onclick handler 
+```ts
+return uploadModal.onOpen();
+```
+
+<!-- step closed -->
+</details>
+<br/><br/>
+
+
+#### created `UploadModal.tsx` the components 
+<hr>
+
+<!-- step open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>responsible for rendering a modal with a form for uploading a song. It leverages the useUploadModal hook to control the modal's visibility and integrates with the react-hook-form library for form management and validation.
+
+- using dummy info for development and skeleton ...
+
+- adding this new `UploadModal` to the `ModalProvider`
+
+    1. I imported the necessary dependencies, including the useState hook from React and the useForm and SubmitHandler types from the react-hook-form library. I also imported the useUploadModal hook that I created earlier.
+
+    2. Inside the UploadModal component, I initialized the isLoading state variable using the useState hook to track the loading state of the form.
+
+    3. I used the useUploadModal hook to access the uploadModal object, which contains the state and actions for controlling the visibility of the modal.
+
+    4. I set up the form using the useForm hook, providing the defaultValues for the form fields.
+
+    5. I defined the onChange function, which is triggered when the modal is closed. It resets the form using the reset function from react-hook-form and calls the onClose action from the uploadModal object to close the modal.
+
+    6. I defined the onSubmit function, which is triggered when the form is submitted. Inside this function, I can implement the logic to upload the form data to Supabase or perform any other necessary actions.
+
+    7. I returned the JSX code, wrapping the form inside the Modal component. I passed the necessary props, such as the title, description, isOpen state, and the onChange function.
+
+    8. Inside the form, I added form fields using the Input component (assuming it is imported) and registered them with the register function from react-hook-form. I also added any necessary validation rules.
+
+
+
+##### to set up the form 
+<hr>
+
+installing packages: 
+```shell
+npm i react-hook-form
+npm i uniqid
+npm install -D @types/uniqid
+```
+
+created:
+```ts
+    const {
+        register,
+        handleSubmit,
+        reset,
+      } = useForm<FieldValues>({
+        defaultValues: {
+          author: '',
+          title: '',
+          song: null,
+          image: null,
+        }
+      });
+```
+
+-  now can use the `reset()` in the onChange handler too
+
+<!-- step closed -->
+</details>
+<br/><br/>
+
+#### created the `Input.tsx` file
+<hr>
+
+<!-- step open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>a reusable input element that applies styling based on Tailwind CSS classes. It accepts various props to configure the input's type, disabled state, and other HTML attributes. The forwardRef function allows the component to work seamlessly with React's ref system, enabling proper interaction with the underlying input element.
+
+
+ 1. I imported the necessary dependencies, including the forwardRef function from React, and the twMerge utility function from the tailwind-merge library.
+
+ 2. I defined the InputProps interface, which extends the React.InputHTMLAttributes<HTMLInputElement> interface to inherit the props of the HTML input element.
+
+ 3. I created the Input component using the forwardRef function. This allows the component to receive a ref as a prop and forward it to the underlying input element.
+
+ 4. Inside the Input component, I deconstructed the props to extract the className, type, and disabled props. I also included the spread operator ...props to pass any additional props to the input element.
+
+ 5. I returned the JSX code, rendering the input element. I set the type attribute to the provided type prop value and applied the CSS classes using the twMerge utility function. The CSS classes define the styling for the input element, including its width, background color, border, padding, and text appearance. Additionally, I included conditional classes based on the disabled prop value to adjust the styling for disabled inputs.
+
+ 6. I set the disabled attribute of the input element to the provided disabled prop value, and passed the ref to the input element using the ref prop.
+
+ 7. I added the displayName property to the Input component, which sets the display name for the component in React DevTools.
+
+ 8. I exported the Input component as the default export of the module, making it available for use in other components.
+
+
+<!-- step closed -->
+</details>
+<br/><br/>
+
+#### Updating the `UploadModal.tsx`
+<hr>
+
+<!-- step open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+##### 1.  Importing the required dependencies and custom hooks:
+
+- Imported useState from "react" for managing loading state.
+- Imported useForm and SubmitHandler from "react-hook-form" for form handling.
+- Imported custom hooks useUploadModal from "@/hooks/useUploadModal".
+- Imported other necessary components like Modal, Input, and Button.
+
+##### 2.  Defining and initializing variables and hooks:
+
+- Declared isLoading state variable using useState to track loading state.
+- Initialized uploadModal using the useUploadModal hook.
+- Extracted supabaseClient and user using useSupabaseClient and useUser custom hooks respectively.
+- Set up form handling using useForm, including defining default form values and registering form fields.
+
+##### 3.  Implementing event handlers:
+
+- Defined the onChange function to handle the modal's open/close state change.
+- Reset the form and close the modal when it is closed.
+
+##### 4. Implementing form submission:
+
+- Defined the onSubmit function as an async function to handle form submission.
+- Extracted the image and song files from the form values.
+- Uploaded the image and song files to the respective Supabase storage buckets using supabaseClient.storage.upload.
+- Handled errors during file upload.
+- Inserted a new record into the "songs" table in the database using supabaseClient.from("songs").insert.
+- Handled any errors during the database insertion.
+- Refreshed the router, reset the form, closed the modal, and displayed success or error toasts based on the outcome.
+
+##### 5.  Rendering the component:
+
+- Rendered the Modal component with appropriate props for title, description, open state, and onChange event.
+- Wrapped the form inside the Modal component.
+- Rendered Input components for song title, artist name, and file selection.
+- Rendered a Button component for submitting the form.
+- Disabled the form elements and button based on the loading state.
+
+
+<!-- step closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+
+
+
+### Libraries added
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+##### react-hook-form:
+
+[Documentation](https://react-hook-form.com/)
+
+Purpose: A library for managing forms in React.
+Contribution: It provides form validation, input tracking, and submission handling, making it easier to manage and validate form data in the UploadModal component.
+
+##### uniqid:
+
+[Documentation](https://www.npmjs.com/package/uniqid)
+
+Purpose: A library for generating unique IDs.
+Contribution: It generates unique IDs that can be used to ensure unique file names when uploading images and songs to Supabase storage, preventing conflicts and ensuring data integrity.
+@supabase/auth-helpers-react:
+
+Purpose: A library for authentication and authorization with Supabase.
+Contribution: It provides a simplified way to authenticate users, retrieve user information, and manage user sessions, which is essential for securing the UploadModal component and interacting with Supabase services.
+
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- DEV JOURNEY CONTAINER CLOSED -->
+</details>
+<!-- -------------------------------------------------------------------------- -->
+
+<br/><br/><br/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## NO(x). TEMPLATE 📃
 <hr>

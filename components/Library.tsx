@@ -2,6 +2,9 @@
 
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
+import useUploadModal from "@/hooks/useUploadModal";
 
 // import { Song } from "@/types";
 // import useUploadModal from "@/hooks/useUploadModal";
@@ -18,9 +21,20 @@ import { AiOutlinePlus } from "react-icons/ai";
 //   }
 
 const Library = () => {
+
+    const authModal = useAuthModal();
+    const uploadModal = useUploadModal();
+    const { user, subscription } = useUser();
     
     const onClick = () => {
-        //Will handle the upload-feature later
+        //if user not signed in - open the sign-in page
+        if (!user) {
+            return authModal.onOpen();
+          }
+
+        //To do check for subscription 
+
+        return uploadModal.onOpen();
     };
 
     return ( 
@@ -35,7 +49,7 @@ const Library = () => {
                     </p>
                 </div>
                 <AiOutlinePlus 
-                    // onClick={onClick} 
+                    onClick={onClick} 
                     size={20} 
                     className="
                         text-neutral-400 
