@@ -932,21 +932,21 @@ Please future Devon don't forget to add the livesite URL to our github OAUTH �
 ## 4. Upload modal & Functionality
 <hr>
 
-### 🔥💻 Developer Journal Entry - {insert title}
+### 🔥💻 Developer Journal Entry - Upload modal & Functionality
 
 I accomplished some essential goals that took this project to the next level! 💥
 
 First, I created a mind-blowing modal for uploading songs to Supabase storage and syncing it with our database. 🎵 This feature delivers an out-of-this-world user experience, providing a slick and intuitive way for users to share their musical creations and elevate our app's vibe. 🎶📤
 
 To <strong>safeguard the precious data</strong>, I implemented 🔒 authentication checks that are tighter than a drumbeat. Only the chosen ones with valid credentials can access the upload functionality, ensuring top-notch data security and keeping those sneaky trolls out! 🙅‍♂️🔐
-
+<br>
 With the power of the rad react-hook-form library, I transformed the mundane task of form handling into a hyper-efficient process. 💪✨ Our users now enjoy seamless form validation and submission, creating a <strong>smooth and error-free experience</strong>. No more facepalms! 🙌🎯
 
 The feedback game is looking great with those sizzling-hot toast notifications. 🍞🔥 Users get <strong>instant visual cues</strong> on their actions, it's all about providing that smooth flow and keeping everyone in sync! 📢💃
-
+<br>
 And let's not forget the <strong>eye-catching aesthetics!</strong> 😎🎨 By harnessing the magic of Tailwind CSS classes with the help of tailwind-merge, I styled and customized our Input component like a true design maestro. 🎨✨🎛️
 
-This epic journey pushed my skills to new heights, honing my problem-solving prowess and deepening my understanding of cutting-edge technologies. 🚀💪 I'm stoked about the progress made and excited to continue iterating and refining this project in collaboration with an amazing team. Let's take it to infinity and beyond! 🚀🌌
+This journey pushed my skills to new heights, honing my problem-solving prowess and deepening my understanding of database management on the front-end.  I'm stoked about the progress made and excited to continue...🚀💪
 
 
 
