@@ -929,7 +929,7 @@ Please future Devon don't forget to add the livesite URL to our github OAUTH �
 <br/><br/>
 <!-- -------------------------------------------------------------------------- -->
 
-## 4. Upload modal & Functionality
+## 4. UPLOAD MODAL & FUNCTIONALITY
 <hr>
 
 ### 🔥💻 Developer Journal Entry - Upload modal & Functionality
