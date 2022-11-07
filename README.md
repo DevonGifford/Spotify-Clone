@@ -1269,6 +1269,890 @@ Contribution: It provides a simplified way to authenticate users, retrieve user 
 
 
 
+## 5. FETCH SONGS, MIDDLEWARE, USER LIBRARY, SEARCH, LIKE FUNCTIONALITY
+<hr>
+
+### 🔥💻 Developer Journal Entry - Big Entry, Lot's of work
+
+A rather big updated, I tackled plenty big tasks this round. 💪 <br>  I started by slaying the challenge of fetching songs from a 🚀 database, complete with all the associated data and sick album art. It required me to harness the power of actions, components, and hooks to unleash the true potential of song data rendering. 🎵 I also dropped a bomb on caching, by thwarting the wicked intentions of that sneaky layout.tsx file.
+
+<strong>One major lesson learned?</strong> <br> 
+The development and implementation of a debounce action. By wielding the mighty useDebounce hook, I unleashed the ability to delay the execution of search queries, vanquishing excessive API requests and elevating the performance of the search feature to god-tier levels. A 🌩️ lightning strike of optimization that boosted user interactions and harnessed the might of data retrieval efficiency & a valuable learning experience 💯
+
+But wait, there's more! I also delved into the arcane <strong>arts of preventing pages from being 🧠 cached</strong>. <br>
+In this critical mission, I wielded the sacred knowledge of setting the revalidate property to 0 in the sacred scrolls of layout.ts, thus ensuring that the page always served the freshest data from the server, delivering users an unparalleled experience of up-to-the-minute information. It shielded us from the potential perils of caching, safeguarding a flawless user journey. 🛡️
+
+Next up, I <strong>crafted a middleware like a master blacksmith</strong>, forging an impenetrable fortress of authentication and session management using Supabase. This wizardry enabled both noble non-authenticated users and esteemed adventurers to access different parts of the application, while keeping the treasured routes protected and performing righteous authentication checks. 🛡️🔒
+
+To enhance the user experience to mythical proportions, I <strong>summoned the user's personal library</strong>. This mystical feature showcased the user's very own collection of uploaded songs in the 🔮 sidebar. With a flick of my code sword, I summoned the powers of actions to fetch songs by the user's ID and commanded the song list to gracefully manifest in the sidebar component. 🎶✨
+
+But lo and behold, the journey wasn't complete without unearthing the <strong>ancient art of searching songs</strong> by their sacred titles. I conjured powerful actions to fetch songs by title, crafted a search input component with debouncing sorcery, and summoned a search results component to reveal the secrets of the realm. Users could now embark on a quest of discovery, finding their desired tunes with the swipe of a finger. 🔍🔮
+
+Finally, I bestowed upon the users the power to like/favorite songs, granting them a taste of divinity. I forged the legendary LikeButton component, which communed with the Supabase gods to perform daring database operations. To further elevate the experience, I crafted a <strong>dedicated page to display the user's favored hymns</strong>, enchanting their senses with the mesmerizing LikedContent component.
+
+In summary, these awe-inspiring enhancements have leveled up the application's functionality to stratospheric heights, empowering users to embark on an unforgettable musical journey. The application now stands as a testament to cutting-edge technology, delivering a personalized and immersive experience that will leave users spellbound. 🚀🎧✨
+
+### For detailed overview of what I did ...
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Steps to Fetch all Song's (with associated data and images)`<strong>
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+>Firstly I should note that I have already added some songs to the database along with corresponding images
+
+
+#### Prevent `layout.tsx` from ever being cached 
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+```ts
+export const revalidate = 0;
+```
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+#### Create action that will load songs in server component
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+-  creating action folder with `actions.ts`
+
+1. Created a new file called `actions.ts` in the `actions` folder to handle fetching songs from Supabase.
+
+2. Implemented an asynchronous function named `getSongs` that returns a `Promise` of an array of `Song` objects. This function uses the `createServerComponentClient` function from `@supabase/auth-helpers-nextjs` and `cookies` from `next/headers` to create a Supabase client instance with proper authentication.
+
+3. Executed a query inside the `getSongs` function to retrieve all songs from the `songs` table in Supabase. The query used the `from` and `select` methods to specify the table and retrieve all columns, and the `order` method to sort the songs based on the `created_at` column in descending order.
+
+4. Exported the `getSongs` function as the default export of the module, allowing other parts of the application to fetch songs from Supabase.
+
+
+Finally added this action to the home `layout.tsx` page, as well as made it asynchronous
+```ts
+export default async function Home() {
+  
+  const songs = await getSongs();
+```
+
+and then render it on the page
+```ts
+<PageContent songs={songs} />
+```
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Creating `PageContent.tsx` Component 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+- creating a component file in the (site folder)
+- creating file 
+
+1. Defined the `PageContent` component as a functional component that receives `songs` as a prop. Imported the `Song` type from `@/types` to ensure type safety.
+
+2. Implemented conditional rendering logic inside the component. Checked if the `songs` list is empty, and if so, displayed a message indicating that no songs are available.
+
+3. Rendered the `songs` list using the `map` function. 
+- Created a `SongItem` component for each item in the `songs` array, 
+- passing the necessary props such as `onClick` and `data`.
+
+4. Styled the component using a CSS grid with responsive column counts to ensure optimal display across different screen sizes.
+
+5. Exported the `PageContent` component as the default export of the module, making it available for use in other parts of the application.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Creating a `SongItem.tsx` Component 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+- creating in the normal component folder 
+- shaping out the skeleton 
+- realised I will need to create a hook to load the image first....
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Creating `useLoadImage.tsx` hook 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1.  Defined the `useLoadImage` custom hook, which takes a `song` object as a parameter. Inside the hook, accessed the Supabase client using the `useSupabaseClient` hook.
+
+2. Implemented logic to check if the `song` object exists. If not, returned `null`.
+
+3. Used the Supabase client to fetch the public URL of the image associated with the `song` from the `images` storage bucket.
+
+4. Returned the public URL of the image from the custom hook.
+
+5. Exported the `useLoadImage` custom hook as the default export of the module, making it available for use in other parts of the application.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Finishing `SongItem.tsx` Component
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. Created the `SongItem.tsx` file to define the `SongItem` component responsible for rendering a single song item.
+
+2. Implemented the `useLoadImage` hook to retrieve the image path for the song and assigned it to the `imagePath` variable.
+
+3. Rendered a container div with appropriate CSS classes to display the song item. Within the container, rendered the image, song title, and author using the retrieved data.
+
+4. Exported the `SongItem` component as the default export of the module, making it available for use in other parts of the application.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Dealing with an issue
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+
+<strong>ERROR<strong>
+
+```error
+Unhandled Runtime Error
+Error: Invalid src prop (https://hlslioxuhjspkegliloe.supabase.co/storage/v1/object/public/images/image-Blasphemy-ljuq068r) on `next/image`, hostname "hlslioxuhjspkegliloe.supabase.co" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+```
+
+<br>
+
+<strong>REASON<strong>
+
+One of the pages that leverages the next/image component, passed a src value that uses a hostname in the URL that isn't defined in the images.remotePatterns in next.config.js.
+
+<br>
+
+<strong>SOLUTION<strong>
+
+>Add my supabase domain to the images config in next.config.js:
+
+In the next.config.js, have to add the domainn to my supabase following:
+
+```js
+const nextConfig = {
+    images : {
+        domains: [
+            "hlslioxuhjspkegliloe.supabase.co"
+        ]
+    }
+}
+```
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Creating a reusable `PlayButton` Component 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. Created the `PlayButton.tsx` file to define the `PlayButton` component responsible for rendering a play button.
+
+2. Imported the `FaPlay` icon from the `react-icons/fa` library to use as the play button icon.
+
+3. Implemented the `PlayButton` component, rendering a button element with appropriate CSS classes to display the play button.
+
+4. Exported the `PlayButton` component as the default export of the module, making it available for use in other components.
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+### <strong>`Steps to create the Middleware`<strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+>I want to create a middleware to handling authentication and session management using Supabase in this project<br> In other words handle authentication-related tasks, such as; <br>- retrieving the user session,<br>-  checking if a user is authenticated,<br>-  and managing user sessions with Supabase.<br><br> In laymans terms, this will help non-authenticated users see the songs etc. <br><br>Therefore protect routes and perform server-side authentication and authorization checks. <br> When a request is made to the server, this middleware function is executed to handle authentication-related tasks.
+#### `middleware.ts` File
+1. Created the folder and `middleware.ts` file in the root folder of the project.
+
+2. Imported the `createMiddlewareClient` function from the `@supabase/auth-helpers-nextjs` library to create a Supabase middleware client.
+
+3. Imported the `NextRequest` and `NextResponse` types from the `next/server` module for handling requests and responses in Next.js.
+
+4. Defined an `async` function named `middleware` with a `req` parameter representing the incoming request.
+
+5. Created a `res` variable using `NextResponse.next()` to initialize the response object.
+
+6. Created a `supabase` variable by calling `createMiddlewareClient` and passing the `req` and `res` objects to set up the Supabase middleware client.
+
+7. Used `await supabase.auth.getSession()` to retrieve the user session using the Supabase middleware client.
+
+8. Returned the `res` object from the middleware function.
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Steps to create the Users Library`<strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+> When a user uploads a song I want this song to show up in the sidebar, so they can see all their songs they have uplaoded
+
+<br>
+
+##### Create action that will `getSongsByUserId`
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+> retrieves songs from the Supabase database based on the current user's ID. This allows you to fetch and display the songs uploaded by a specific user in your application.
+
+Import the necessary dependencies and types:
+```tsx
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { Song } from "@/types";
+```
+
+1. Get the user session data
+-  Use the `supabase.auth.getSession()` function to retrieve the user session data.
+-  Destructure the `data` and `error` properties from the result.
+
+2. Handle any session errors
+-  Check if there is an error (`sessionError`) in the session data.
+-  If an error exists, log the error message and return an empty array.
+
+3. Query the database to get the songs for the user
+-  Use the `supabase.from('songs').select('*')` syntax to query the database for the songs.
+-  Apply a filter using the `eq` method to retrieve songs that match the user's `user_id`.
+-  Order the songs by their upload time in descending order using the `order` method.
+
+4. Handle any query errors
+-  Check if there is an error (`error`) in the query result.
+-  If an error exists, log the error message.
+
+5. Return the fetched data or an empty array
+-  Return the fetched data (`data`) as an array, or an empty array if no data is available.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+##### Adding the `getSongsByUserId` function to the `layout.tsx`
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+-  turn the function into an asynchronous function 
+-  create a constant that will call and await the songs list
+```tsx
+const userSongs = await getSongsByUserId();
+```
+-  I dont want this to ever be cached either, so adding :
+```tsx
+export const revalidate = 0;
+```
+-  Passing the `userSongs` to the `<SideBar>` component 
+  
+<strong>Inside the `SideBar` component: </strong>
+
+-  accept the songs as props
+-  update the interface using the @types 
+-  pass into the render into the library component 
+
+
+<strong>Inside the `library` component: </strong>
+
+- adding an interface for the component 
+- passing the songs into the component 
+- testing the rendering of the song list:
+```tsx
+// List of Songs will go here
+
+{songs.map((item) => (
+    <div>{item.title}</div>
+))}
+```
+
+> I know this is using a bit of prop drilling but I am going to justify it 
+> This is only going down two levels, its really a small application 
+> And I am using server components
+> Therfore this saves a lot of development time and prevents complication
+> Obviously in a bigger production app, would have to use either State Management Library, Custom Hooks or componenet composition.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#####  Creating a `MediaItem` component to render the uploaded songs in the sidebar
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. Import dependencies and custom hooks
+
+- Import the necessary dependencies, including the Image component from Next.js, the useLoadImage custom hook, and the Song type from the @/types module.
+
+2. Define the MediaItem component
+
+- Declare the MediaItem functional component using the React.FC type.
+- Pass the MediaItemProps interface as the generic type to define the prop types for the component.
+
+3. Implement the component logic
+
+- Inside the MediaItem component, utilize the useLoadImage custom hook to retrieve the image URL for the data object.
+- Define the handleClick function to handle the click event on the component.
+- Render the TSX code for the MediaItem component, including the image container with backup image, the title and artist information.
+
+4. Export the component
+
+- Export the MediaItem component as the default export of the module.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+### <strong>`Steps to create the Search Functionality`<strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+
+#### Creating action that can fetch songs depending on the title 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. Import dependencies and modules
+
+- Import the necessary dependencies and modules, including the createServerComponentClient function from @supabase/auth-helpers-nextjs, the cookies and headers objects from next/headers, and the Song type from the @/types module.
+
+2. Define the getSongsByTitle function
+
+- Declare the getSongsByTitle asynchronous function that takes a title parameter of type string and returns a Promise of type Song[].
+- Inside the function, use the createServerComponentClient function to create a Supabase client instance with the provided cookies.
+- Handle the case when the title parameter is empty. If title is empty, call the getSongs function to retrieve all songs and return the result.
+- Perform a query on the songs table in the database to fetch songs that match the provided title parameter. Use the ilike method to perform a case-insensitive search for titles that contain the provided string.
+- Order the results by the created_at column in descending order.
+- Handle any errors that occur during the query and log the error message to the console.
+- Return the fetched data as an array, or an empty array if no data is available.
+
+3. Export the function
+
+- Export the getSongsByTitle function as the default export of the module.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+#### Creating `page.tsx`
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+-  in the app folder created a folder called search, within that folder created a file called `page.tsx`
+
+>I fetched songs by title using the getSongsByTitle action, and then rendered the search page with the appropriate components and props. 
+>The Search component provides a complete search experience by displaying the search input, fetching and displaying the search results, and styling the page appropriately.
+
+1. Fetch songs by title
+
+- I imported the `getSongsByTitle` action from the` @/actions` directory.
+- Inside the Search component, I called the `getSongsByTitle` function asynchronously, passing the `searchParams.title` as the argument.
+- I stored the fetched songs in the songs variable.
+```tsx
+const Search = async ({ searchParams }: SearchProps) => {
+  const songs = await getSongsByTitle(searchParams.title);
+```
+
+1. Render the search page
+
+- I returned a TSX code block that represented the search page.
+  - The search page was enclosed within a div with classes for styling.
+  - I included a Header component with a title and a SearchInput component for search functionality.
+- The fetched songs were passed as props to the SearchContent component.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Creating new hook - `useDebounce.ts`
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+> I want to create a delay on the search input.  I.e. the user will start typing the song they are searching for but I don't want to re-render the entire component upon each input the user makes, I want to have a little delay.
+> Therefore, the useDebounce hook can be used to debounce the value updates and is useful for scenarios where you want to delay the execution of a function or reduce the frequency of updates based on user input.
+
+1. Initialize state and effect
+
+-  I declared a function called `useDebounce` that took a generic type `T` as the value and an optional delay parameter of type number.
+```tsx
+function useDebounce<T>(value: T, delay?: number): T {
+```
+-  Inside the function, I used the `useState` hook to initialize the `debouncedValue` state variable with the initial value of the provided value.
+
+-  I utilized the `useEffect` hook to set up a timer that updated the `debouncedValue` with the provided value after a specified delay (defaulted to 500 milliseconds).
+-  Finally, I returned the `debouncedValue`.
+```tsx
+useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500)
+```
+
+
+2. Handle cleanup
+
+To ensure proper cleanup and prevent memory leaks, I included a cleanup function in the useEffect hook. This function cleared the timer using `clearTimeout`.
+
+
+3. Trigger updates
+
+I specified the dependencies for the useEffect hook by including value and delay in the dependency array. This ensured that the effect was re-executed whenever either of these values changed.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+#### Creating `SearchInput.tsx`
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>  The component handles user input, debounces the value to reduce unnecessary URL updates, and updates the URL based on the debounced value. 
+> The SearchInput component provides a user-friendly search experience by allowing users to input their search queries and dynamically updating the URL to reflect the search parameters.
+ 
+
+1.  Set up dependencies and state
+
+-  I imported the necessary dependencies, including useEffect and useState from React, and useRouter from the next/navigation module.
+-  I initialized the router object using the useRouter hook.
+-  I set up the value state variable using the useState hook to store the current input value.
+-  I used the `useDebounce` custom hook to create the `debouncedValue` variable, which delays the update of the value by 500 milliseconds.
+
+2.  Handle input changes and update the URL
+
+-  I implemented an useEffect hook with a dependency on `debouncedValue` and router.
+-  Inside the effect, I created a query object with the `debouncedValue` as the title property.
+```tsx
+ const query = {
+      title: debouncedValue,
+    };
+```
+-  I used the qs.stringifyUrl function to generate a URL string with the specified query parameters and path.
+```tsx
+ const url = qs.stringifyUrl({
+      url: '/search',
+      query
+    });
+```
+-  I updated the URL in the browser by calling router.push with the generated URL as the argument.
+
+3.  Render the search input component
+
+-  I returned a JSX code block representing the search input component.
+-  I used the Input component to render an input field with a placeholder and value that is controlled by the value state variable.
+-  I set up an onChange event handler to update the value state whenever the input value changes.
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+####  Created the `SearchContent.tsx` component
+
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>The component handles the rendering of search results based on the songs prop. It dynamically renders the search results or a "no results" message based on the presence or absence of songs in the songs array.
+
+
+1. Set up dependencies and component props
+
+- I imported the necessary dependencies, including the Song type and the `MediaItem` component.
+- I defined the `SearchContentProps` interface to specify the prop types expected by the `SearchContent` component.
+
+2. Render search results or "no results" message
+
+- I checked if the songs array is empty. If it is, I returned a TSX code block displaying a message indicating no songs were found.
+```tsx
+if (songs.length === 0) {
+    return ( no song content goes here)
+}
+```
+3. Render search results
+
+- If there are songs in the songs array, I returned a TSX code block to render the search results.
+- I used the map function to iterate over each song in the songs array.
+```tsx
+{songs.map((song: Song) => ( CONTENT GOES HERE ))}
+```
+- For each song, I rendered a MediaItem component, passing the song data as the data prop.
+```tsx
+<MediaItem 
+    onClick={() => {}}   //update later to queue the song
+    data={song}
+/>
+```
+- I also wrapped the MediaItem component inside a div with the necessary styling and layout to display the search results in a column.
+- I want to add a like button here, that will be the next thing I do 
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+### <strong>`Steps to create the Like/Favourite Functionality`<strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Creating a LikeButton
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>The component handles the logic and rendering of the like button, allowing users to like or unlike a song. It interacts with the supabaseClient to perform database operations and provides visual feedback to the user through toast messages.
+
+1. Set up dependencies and component props
+
+- I imported the necessary dependencies, including the React icons (AiOutlineHeart and AiFillHeart), the useRouter hook, the toast function from react-hot-toast, and the useSessionContext and useUser hooks.
+- I defined the `LikeButtonProps` interface to specify the prop types expected by the LikeButton component.
+
+2. Fetch and check if the song is liked
+
+- I used the `useEffect` hook to fetch data and check if the song has been previously liked.
+- Inside the effect, I used the `supabaseClient` to query the `liked_songs` table for a matching record with the user's ID and the song ID.
+- If a matching record is found, I set the `isLiked` state to true.
+
+3. Dynamically render the like icon
+
+- I created an Icon variable that dynamically selects the appropriate heart icon (AiFillHeart or AiOutlineHeart) based on the `isLiked` state.
+
+4. Handle the like functionality
+
+- I implemented the handleLike function to handle what happens when the user clicks the like button.
+  - If the user is not signed in, it opens the sign-in page.
+  - If the song is already liked, it deletes the corresponding record from the `liked_songs` table.
+  - If the song is not yet liked, it inserts a new record into the `liked_songs` table.
+- After each action, it updates the `isLiked` state accordingly and shows a toast message to provide feedback to the user.
+
+5. Update the page and render the like button
+
+- After the like action is performed, I used the `router.refresh()` method to update the page and reflect any changes in the liked status of the song.
+- Finally, I returned a button element that renders the appropriate heart icon and triggers the handleLike function when clicked.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#### Creating the Liked songs view
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- mini-SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+>retrieves the liked songs for a specific user from the database. 
+>It utilizes Supabase's querying capabilities and returns an array of songs with the unnecessary properties filtered out.
+
+#####  Creating an action to fetch the users liked songs
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. Set up dependencies and create the function
+
+- I imported the necessary dependencies, including the Song type from "@/types" and the createServerComponentClient and cookies from "@supabase/auth-helpers-nextjs".
+- I defined the getLikedSongs function that returns a Promise of type Song[].
+
+2. Retrieve the user session
+
+- I used the createServerComponentClient function to create a Supabase client instance and passed the cookies object as an argument.
+- I called the getSession method from supabase.auth to retrieve the user session data.
+- I destructured the session object from the response data.
+
+3. Query the liked songs
+
+- I used the supabase.from method to query the "liked_songs" table.
+- I used the select method to fetch all columns from the table and the songs(*) syntax to fetch related data from the "songs" table.
+- I applied a filter using the eq method to match the "user_id" column with the user's ID obtained from the session data.
+- I ordered the results by the "created_at" column in descending order.
+
+4. Handle the query response
+
+- I checked if the data property exists in the response.
+- If it does not exist, I returned an empty array to handle the case where no liked songs are found.
+
+5. Extract and return the songs
+
+- I mapped over the data array and spread the songs relation object into a new object for each item.
+- This ensures that only the relevant song data is returned without any additional properties.
+
+Finally, I returned the mapped array of songs.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#####  Creating a new/seperate page for the liked songs 
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Liked component retrieves the liked songs and renders them in a styled container.
+>The component uses Next.js' Image component for image rendering and includes appropriate header elements for the page title and playlist.
+
+In the app folder, created a new folder for `liked` and created a `page.tsx`
+
+1. Set up dependencies and create the component
+
+- I imported the necessary dependencies, including the Image component from "next/image" and the getLikedSongs function from "@/actions/getLikedSongs".
+- I imported the Header component and the LikedContent component.
+- I defined the Liked component.
+
+2. Retrieve the liked songs
+
+- I called the getLikedSongs function to fetch the liked songs data.
+- I stored the fetched songs in the songs variable.
+
+3. Render the component
+
+- I returned JSX elements to render the Liked component.
+- I wrapped the content in a div with appropriate styling classes.
+- I used the Header component to display the header section of the Liked page.
+- I added an image to represent the liked songs.
+- I included a heading to indicate the page title and a small heading for the playlist.
+- I passed the songs data to the LikedContent component.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+#####  Creating a `LikedContent.tsx` Componenet   
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>the LikedContent component checks user authentication and renders the liked songs.
+>The component handles the case of no liked songs and renders the MediaItem and LikeButton components for each song.
+
+1. Set up dependencies and create the component
+
+- I imported the necessary dependencies, including the useEffect and useRouter hooks from "react" and "next/navigation" respectively.
+- I imported the Song type from "@/types".
+- I imported the useUser hook from "@/hooks/useUser".
+- I imported the MediaItem component from "@/components/MediaItem" and the LikeButton component from "@/components/LikeButton".
+- I defined the LikedContent component.
+
+2. Check user authentication
+
+- I accessed the isLoading and user values from the useUser hook.
+- I used the useEffect hook to check if the authentication process is still loading or if the user is not authenticated.
+- If the authentication is not loading and the user is not authenticated, I redirected the user to the home page.
+
+3. Render the component
+
+- I added conditional rendering to handle the case where there are no liked songs.
+- If the songs array is empty, I displayed a message indicating that there are no liked songs.
+- If there are liked songs, I mapped over the songs array and rendered the MediaItem component for each song, along with the LikeButton component.
+- I wrapped the content in a div with appropriate styling classes.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- mini-SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+### Libraries added
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+#### Query-string
+
+```shell
+npm i query-string
+```
+
+This statement imports the query-string library and assigns it to the queryString variable, making its functionality accessible within the file. With the library readily available, I could easily extract and manipulate URL query parameters, enabling seamless search functionality within the application.
+
+In summary, the addition of the query-string library greatly simplified the handling of URL query parameters, allowing for efficient extraction and manipulation of search parameters. By incorporating this library into the project and utilizing its functionality, I was able to enhance the search feature and provide users with a seamless and intuitive search experience.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- DEV JOURNEY CONTAINER CLOSED -->
+</details>
+<!-- -------------------------------------------------------------------------- -->
+
+<br/><br/><br/><br/>
+
+
+
+
 
 
 
