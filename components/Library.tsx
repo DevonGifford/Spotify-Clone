@@ -5,22 +5,20 @@ import { AiOutlinePlus } from "react-icons/ai";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import useUploadModal from "@/hooks/useUploadModal";
+import { Song } from "@/types";
+import MediaItem from "./MediaItem";
 
-// import { Song } from "@/types";
-// import useUploadModal from "@/hooks/useUploadModal";
-// import { useUser } from "@/hooks/useUser";
-// import useAuthModal from "@/hooks/useAuthModal";
 // import useSubscribeModal from "@/hooks/useSubscribeModal";
 // import useOnPlay from "@/hooks/useOnPlay";
 
 // import MediaItem from "./MediaItem";
 
 
-// interface LibraryProps {
-//     songs: Song[];
-//   }
+interface LibraryProps {
+    songs: Song[];
+  }
 
-const Library = () => {
+const Library: React.FC<LibraryProps> = ({songs}) => {
 
     const authModal = useAuthModal();
     const uploadModal = useUploadModal();
@@ -63,15 +61,21 @@ const Library = () => {
 
             <div className="flex flex-col gap-y-2 mt-4 px-3">
 
-                List of Songs will go here
+                {/* List of Songs will go here */}
 
-                {/* {songs.map((item) => (
+                {/* TEST IF WORKING
+                {songs.map((item) => (
+                    <div>{item.title}</div>
+                ))} 
+                */}
+
+                {songs.map((item) => (
                 <MediaItem 
-                    onClick={(id: string) => onPlay(id)} 
+                    onClick={()=> {}} //(id: string) => onPlay(id) - add play feature 
                     key={item.id} 
                     data={item}
                 />
-                ))} */}
+                ))}
 
             </div>
 

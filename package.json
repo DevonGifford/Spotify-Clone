@@ -16,6 +16,7 @@
     "@supabase/auth-ui-shared": "^0.1.6",
     "autoprefixer": "^10.4.14",
     "next": "^13.4.9",
+    "query-string": "^8.1.0",
     "react-hook-form": "^7.45.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
