@@ -1274,7 +1274,7 @@ Contribution: It provides a simplified way to authenticate users, retrieve user 
 
 ### 🔥💻 Developer Journal Entry - Big Entry, Lot's of work
 
-A rather big updated, I tackled plenty big tasks this round. 💪 <br>  I started by slaying the challenge of fetching songs from a 🚀 database, complete with all the associated data and sick album art. It required me to harness the power of actions, components, and hooks to unleash the true potential of song data rendering. 🎵 I also dropped a bomb on caching, by thwarting the wicked intentions of that sneaky layout.tsx file.
+A <strong>rather big update</strong>, I tackled plenty big tasks this round. 💪 <br>  I started by slaying the challenge of fetching songs from a 🚀 database, complete with all the associated data and sick album art. It required me to harness the power of actions, components, and hooks to unleash the true potential of song data rendering. 🎵 I also dropped a bomb on caching, by thwarting the wicked intentions of that sneaky layout.tsx file.
 
 <strong>One major lesson learned?</strong> <br> 
 The development and implementation of a debounce action. By wielding the mighty useDebounce hook, I unleashed the ability to delay the execution of search queries, vanquishing excessive API requests and elevating the performance of the search feature to god-tier levels. A 🌩️ lightning strike of optimization that boosted user interactions and harnessed the might of data retrieval efficiency & a valuable learning experience 💯
