@@ -1279,7 +1279,7 @@ A <strong>rather big update</strong>, I tackled plenty big tasks this round. �
 <strong>One major lesson learned?</strong> <br> 
 The development and implementation of a debounce action. By wielding the mighty useDebounce hook, I unleashed the ability to delay the execution of search queries, vanquishing excessive API requests and elevating the performance of the search feature to god-tier levels. A 🌩️ lightning strike of optimization that boosted user interactions and harnessed the might of data retrieval efficiency & a valuable learning experience 💯
 
-But wait, there's more! I also delved into the arcane <strong>arts of preventing pages from being 🧠 cached</strong>. <br>
+But wait, there's more! I also delved into the arcane <strong>arts of preventing pages from being cached 🧠</strong>. <br>
 In this critical mission, I wielded the sacred knowledge of setting the revalidate property to 0 in the sacred scrolls of layout.ts, thus ensuring that the page always served the freshest data from the server, delivering users an unparalleled experience of up-to-the-minute information. It shielded us from the potential perils of caching, safeguarding a flawless user journey. 🛡️
 
 Next up, I <strong>crafted a middleware like a master blacksmith</strong>, forging an impenetrable fortress of authentication and session management using Supabase. This wizardry enabled both noble non-authenticated users and esteemed adventurers to access different parts of the application, while keeping the treasured routes protected and performing righteous authentication checks. 🛡️🔒
