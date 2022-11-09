@@ -1291,7 +1291,9 @@ But lo and behold, the journey wasn't complete without unearthing the <strong>an
 Finally, I bestowed upon the users the power to like/favorite songs, granting them a taste of divinity. I forged the legendary LikeButton component, which communed with the Supabase gods to perform daring database operations. To further elevate the experience, I crafted a <strong>dedicated page to display the user's favored hymns</strong>, enchanting their senses with the mesmerizing LikedContent component.
 
 In summary, these awe-inspiring enhancements have leveled up the application's functionality to stratospheric heights, empowering users to embark on an unforgettable musical journey. The application now stands as a testament to cutting-edge technology, delivering a personalized and immersive experience that will leave users spellbound. 🚀🎧✨
+<br><br>🌬️ A puff of smoke and the wizardly developer has disappeared... <br/> *until next time*, echoes seemingly out of nowhere 👀
 
+ 
 ### For detailed overview of what I did ...
 
 <!-- -------------------------------------------------------------------------- -->
