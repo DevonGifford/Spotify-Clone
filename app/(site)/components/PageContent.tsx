@@ -2,7 +2,7 @@
 
 import { Song } from "@/types";
 import SongItem from "@/components/SongItem";
-// import useOnPlay from "@/hooks/useOnPlay";
+import useOnPlay from "@/hooks/useOnPlay";
 
 interface PageContentProps {
   songs: Song[];
@@ -11,7 +11,7 @@ interface PageContentProps {
 const PageContent: React.FC<PageContentProps> = ({
   songs
 }) => {
-  //const onPlay = useOnPlay(songs);
+  const onPlay = useOnPlay(songs);
   
 
   //Check if songs list is empty
@@ -39,7 +39,7 @@ const PageContent: React.FC<PageContentProps> = ({
     >
       {songs.map((item) => (
         <SongItem 
-          onClick={() => {}}  //(id: string) => onPlay(id) - play song on cllick
+          onClick={(id: string) => onPlay(id)}  //plays song on cllick
           key={item.id} 
           data={item}
         />

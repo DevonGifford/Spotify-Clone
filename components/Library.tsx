@@ -1,17 +1,18 @@
 "use client";
 
-import { TbPlaylist } from "react-icons/tb";
-import { AiOutlinePlus } from "react-icons/ai";
+
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
+import useOnPlay from "@/hooks/useOnPlay";
 import useUploadModal from "@/hooks/useUploadModal";
+
 import { Song } from "@/types";
 import MediaItem from "./MediaItem";
 
-// import useSubscribeModal from "@/hooks/useSubscribeModal";
-// import useOnPlay from "@/hooks/useOnPlay";
+import { TbPlaylist } from "react-icons/tb";
+import { AiOutlinePlus } from "react-icons/ai";
 
-// import MediaItem from "./MediaItem";
+// import useSubscribeModal from "@/hooks/useSubscribeModal";
 
 
 interface LibraryProps {
@@ -23,6 +24,7 @@ const Library: React.FC<LibraryProps> = ({songs}) => {
     const authModal = useAuthModal();
     const uploadModal = useUploadModal();
     const { user, subscription } = useUser();
+    const onPlay = useOnPlay(songs);
     
     const onClick = () => {
         //if user not signed in - open the sign-in page
@@ -71,7 +73,7 @@ const Library: React.FC<LibraryProps> = ({songs}) => {
 
                 {songs.map((item) => (
                 <MediaItem 
-                    onClick={()=> {}} //(id: string) => onPlay(id) - add play feature 
+                    onClick={(id: string) => onPlay(id)} 
                     key={item.id} 
                     data={item}
                 />
