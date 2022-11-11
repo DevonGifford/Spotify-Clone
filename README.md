@@ -2144,6 +2144,433 @@ In summary, the addition of the query-string library greatly simplified the hand
 
 
 
+## 5. MUSIC PLAYER FUNCTIONALITY
+<hr>
+
+### 🔥💻 Developer Journal Entry - Big Entry, Lot's of work
+
+ Made some major moves on the Player component for a sick music streaming service! 🎧💥 <br> I unleashed a bunch of <strong>killer custom hooks</strong> like usePlayer, useGetSongById, useLoadSongUrl, and useOnPlay, leveling up the app's functionality and user experience. These hooks were like superpowers, enabling me to slay the player state, fetch song data, snag song URLs, and rock out with seamless song playback and playlist management. 🚀🎵
+
+To crank up the <strong>player interface</strong>, I tapped into the power of the radix-ui/react-slider library, copped a slick slider component that gave users smooth and interactive control over the volume. 🎚️🔥 And I cranked up the beats with the use-sound library, unleashing epic play, pause, and automatic transitions between songs. 🎶🎉
+
+But hey, it <strong>wasn't all smooth sailing!</strong> I faced some gnarly challenges like dynamically changing songs and wrangling the volume state. No worries though, I shredded those obstacles by thinking outside the box and delivering some killer solutions. 🤘💡
+
+To get the <strong>player functionality</strong> to groove with the existing features, I dropped the new player functionality into all the relevant components, such as; the sidebar, search content, and liked content, making the whole app vibe in harmony. 🤟🎸
+
+Mad coding skills, problem-solving finesse, and insane attention to detail. The real deal when it comes to React, custom hook wizardry, library integration, and crafting sick UIs. I'm stoked about the progress I've made and I'm ready to crank up the player's functionality with a subscription model and stripe intergration! 🙌🚀
+
+
+### For detailed overview of what I did ...
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+> Creating skeleton for `Player` component & importing it into into `layout.tsx`
+
+### <strong>`New hooks created`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Creating new hook:  `usePlayer.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. I imported `create` from 'zustand'.
+   
+2. I defined the `PlayerStore` interface with properties and functions.
+
+3. I used `create` to create the `usePlayer` hook:
+   - I initialized the initial state object with empty `ids` and `activeId` properties.
+   - I defined the `setId`, `setIds`, and `reset` functions using the `set` function.<br><br>
+4. I exported the `usePlayer` hook as the default export of the module.
+
+</details>
+<br/><br/>
+
+#### Creating new hook:  `useGetSongById.ts` 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Purpose is to fetch the song's data by encapsulating the necessary logic and handling the loading state. 
+>Creating a convenient way to retrieve song data based on the provided id 
+>Allows components to access the loading state and the fetched song data.
+
+
+1. I imported `useEffect`, `useMemo`, `useState`, `useSessionContext`, and `toast`.
+
+2. I created the `useSongById` hook:
+   - I defined `isLoading` and `song` state variables.
+   - I retrieved the `supabaseClient` from the `useSessionContext` hook.
+
+3. I used `useEffect` to fetch the song data:
+   - In the dependency array, added `id` & `supabaseClient` to ensure the effect is triggered when these values change.
+   - I checked if `id` exists and set `isLoading` to `true`.
+   - I defined an async function `fetchSong` to query the song data.
+   - I handled the error and set the `song` state with the retrieved data.
+
+4. I used `useMemo` to memoize the returned values.
+   - I returned an object with isLoading and song properties inside the useMemo callback.
+   - The dependency array of useMemo includes isLoading and song.
+   - values are only recalculated if the above dependencies change
+
+  >By memoizing the returned values with useMemo, the hook can provide consistent and efficient access to isLoading and song without unnecessary re-computation.
+
+
+5. I exported the `useSongById` hook as the default export of the module.
+
+</details>
+<br/><br/>
+
+#### Creating new hook:  `useLoadSongUrl.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>This custom hook retrieves the public URL of a song's audio file from the Supabase storage. 
+>It takes a song object as a parameter and returns the public URL of the song's audio file.
+
+1. Firstly, imported the `useSupabaseClient` hook from `@supabase/auth-helpers-react`.
+
+2. Then created the `useLoadSongUrl` function component that takes a `song` object as a parameter.
+
+3. I obtained the Supabase client using the `useSupabaseClient` hook.
+
+4. I handled the case when the `song` object was falsy by returning an empty string.
+
+5. I accessed the Supabase storage through `supabaseClient.storage`.
+
+6. I used the `getPublicUrl` method on the storage object with `song.song_path` to retrieve the public URL of the song's audio file.
+
+7. I returned the obtained public URL from the component.
+
+</details>
+<br/><br/>
+
+#### Creating new hook:  `useOnPlay.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>The `useOnPlay` hook is a custom hook that enables playing songs and managing the playlist. 
+>It takes an array of `songs` as a parameter and returns an `onPlay` function.
+
+
+1. I imported the necessary dependencies
+
+2. I defined the useOnPlay hook:
+  - I declared a function named useOnPlay that takes an array of songs as a parameter.
+  - Inside the hook, I initialized the required hooks:
+  - I used the usePlayer hook and assigned the returned value to a variable named player.
+  - I used the useAuthModal hook and assigned the returned value to a variable named authModal.
+  - I used the useUser hook and assigned the returned values for subscription and user to respective variables.
+
+3.  I defined the onPlay function within the useOnPlay hook:
+   - It takes an id parameter.
+   - I checked if the user was not logged in:
+     - If not logged in, I called authModal.onOpen() to open the authentication modal.
+     - I set the id as the active song in the player by calling player.setId(id).
+     - I set the array of song IDs from the songs array as the playlist in the player by calling player.setIds(songs.map((song) => song.id)).
+     - I returned the onPlay function from the useOnPlay hook.
+
+4.  I used the useOnPlay hook in my component:
+   - I declared an array of songs that I wanted to use with the useOnPlay hook.
+   - I called the useOnPlay hook and assigned the returned value to a variable, such as onPlay.
+   - To play a specific song, I called the onPlay function with the corresponding song ID as the argument.
+
+</details>
+<br/><br/>
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Updating the PageContent to use new hook`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+  ><br>Simply added the newly created hook into the component and updated the onclick to make use of the newly created hook.  <br><br>
+  >Clicking will now open the player at the bottome of the page.  <br><br>
+  >With this taken care of I can continue to develop the player.<br><br>
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Further development of Player`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+##### Creating `<PlayerContent>` component skeleton
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+- Created and Styled the PlayerContent component, with hardcoded values and empty onClicks
+
+- Utilized various CSS classes and styles to achieve the desired layout and appearance.
+
+- Will return to complete the functionality 
+
+</details>
+<br/><br/>
+
+##### Creating `<Slider>` component (using radix-ui)
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1. I imported the necessary dependencies from the `@radix-ui/react-slider` library.
+    ```shell
+    npm i @radix-ui/react-slider
+    ```
+
+1. I defined the `Slider` component as a functional component that accepts the `value` and `onChange` props.
+
+2. Inside the component, I implemented a `handleChange` function that was called when the slider value changed.
+
+3. I returned the JSX markup for the slider using the `RadixSlider.Root` component.
+
+4. I customized the appearance and behavior of the slider by setting appropriate props like `defaultValue`, `value`, `onValueChange`, `max`, `step`, and `aria-label`.
+
+5. Within the slider markup, I defined the track and range elements using the `RadixSlider.Track` and `RadixSlider.Range` components respectively.
+
+6. I applied necessary styles and classes to the slider and its elements to achieve the desired look.
+
+7. Finally, I exported the `Slider` component as the default export.
+
+
+</details>
+<br/><br/>
+
+##### Completing the `<PlayerContent>` component
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+1. Imported the necessary dependencies, including the newly imported  `useSound`
+```shell
+npm i use-sound
+```
+
+2. I defined the `PlayerContent` component as a functional component that accepts the `song` and `songUrl` props.
+
+3. Inside the component, I used the `usePlayer` hook to access the player state and functions.
+
+4. I initialized state variables for `volume` and `isPlaying` using the `useState` hook.
+
+5. I created appropriate icons based on the play/pause state using conditional rendering.
+
+6. I implemented the logic for the play next and play previous buttons using the `onPlayNext` and `onPlayPrevious` functions.
+   - taking into consideration that there may be no songs in the playlist
+   - no next song or previouse song in the playlist will loops to the end/start accordingly 
+
+7. I used the `useSound` hook to handle the play, pause, and song ending events.
+    ```tsx
+    const [play, { pause, sound }] = useSound(
+      songUrl,
+      { 
+          volume: volume,
+          //pressing play
+          onplay: () => setIsPlaying(true),
+          //song ends
+          onend: () => {
+          setIsPlaying(false);
+          onPlayNext();
+          },
+          //pressing pause
+          onpause: () => setIsPlaying(false),
+          format: ['mp3']
+      }
+    ```
+
+8. Automatically playes the song when the component loads, via the `useEffect` hook.
+
+9.  Implemented the handlePlay function to toggle play/pause based on the current play state.
+
+10. Implemented the toggleMute function to toggle the volume between muted and unmuted states.
+
+</details>
+<br/><br/>
+
+##### `ISSUE:`  Getting the song to change 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+<strong>ISSUE:</strong>
+
+The song cannot change dynamically, the use-sound does not allow for dynamic changing<br><br>
+
+<strong>SOLUION:</strong>  
+
+The only way I could get this to work is by passing in the songUrl as a key 
+```tsx
+<PlayerContent 
+  key={songUrl} 
+  song={song} 
+  songUrl={songUrl} 
+/>
+```
+If the key changes the component gets destroyed and will be reloaded with whatever the new songUrl is.  
+
+While this works, it does cause some issues;
+   - A small lag in changing of songs,
+   - The set volume cannot be memoised if component is being destroyed and reloaded.<br><br>
+
+><br>I am sure real streaming services, such as Spotify, have created their own custom hooks and don't depend on something as simple as use-sound.<br><br>
+>Perhaps later I will return and see if something can be done to either mitigate these issues or perhaps research a better library to use <br><br>
+
+</details>
+<br/><br/>
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`BUG FIX:  Updating the sidebar styling to be dynamic`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+>If the player is loads in, this is causing some style clashing and causing the Media Items to be cut off.
+
+1.  importing the `usePlayer` hook
+```tsx
+const player = usePlayer();
+``` 
+
+2.  Updating the container div to use `twMerge`
+- From:
+  ```tsx
+  <div className='flex h-full'>
+  ```  
+- To : 
+  ```tsx
+  <div className='flex h-full'>
+  ```  
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Adding the new player functionality to to the app`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+Adding to the following components:
+
+- ###### `Library.tsx` (i.e. the sidebar)
+
+- ###### `SearchContent` (i.e. list produced from searching)
+
+- ###### `LikedContent` (i.e. all the songs that I liked)
+
+<br>
+
+adding the new hook and passing in the songs
+```tsx
+const onPlay = useOnPlay(songs);
+```
+
+updating the Media Item onclick to play the song
+```tsx
+<MediaItem 
+  onClick={(id: string) => onPlay(id)} 
+  ...
+/>
+```
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+### Libraries added
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+#### radix-ui/react-slider
+
+```shell
+npm i @radix-ui/react-slider
+```
+
+>The @radix-ui/react-slider package is a collection of React components designed to create customizable sliders and range inputs. It provides a set of UI components that enable developers to build interactive sliders with various styles and behaviors. The package offers components such as RadixSlider.Root for the main slider container, RadixSlider.Track for the track element, and RadixSlider.Range for the range indicator. These components can be used together to create fully functional sliders with options for customization and event handling. The purpose of @radix-ui/react-slider is to simplify the implementation of sliders in React applications, providing a flexible and accessible solution for creating interactive user interfaces that involve slider inputs.
+
+
+#### use-sound 
+
+```shell
+npm i use-sound
+```
+
+>The use-sound package is a React hook that simplifies sound playback in React applications by abstracting the complexities of the Web Audio API. It provides an easy-to-use interface for controlling and managing sound elements, allowing developers to incorporate audio features without dealing with low-level audio implementation details. The purpose of use-sound is to streamline the integration of sound in React projects, enabling developers to enhance user experiences by easily adding sound effects, background music, and other audio playback functionality.
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+
 
 
 
