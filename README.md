@@ -2142,7 +2142,7 @@ In summary, the addition of the query-string library greatly simplified the hand
 ## 6. MUSIC PLAYER FUNCTIONALITY
 <hr>
 
-### 🔥💻 Developer Journal Entry - Big Entry, Lot's of work
+### 🔥💻 Developer Journal Entry - I hear the beats
 
  Made some major moves on the Player component for a sick music streaming service! 🎧💥 <br> I unleashed a bunch of <strong>killer custom hooks</strong> like usePlayer, useGetSongById, useLoadSongUrl, and useOnPlay, leveling up the app's functionality and user experience. These hooks were like superpowers, enabling me to slay the player state, fetch song data, snag song URLs, and rock out with seamless song playback and playlist management. 🚀🎵
 
