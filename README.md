@@ -2134,12 +2134,7 @@ In summary, the addition of the query-string library greatly simplified the hand
 
 
 
-<!-- -------------------------------------------------------------------------- -->
-<!-- DEV JOURNEY CONTAINER CLOSED -->
-</details>
-<!-- -------------------------------------------------------------------------- -->
 
-<br/><br/><br/><br/>
 
 
 
