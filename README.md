@@ -2139,7 +2139,7 @@ In summary, the addition of the query-string library greatly simplified the hand
 
 
 
-## 5. MUSIC PLAYER FUNCTIONALITY
+## 6. MUSIC PLAYER FUNCTIONALITY
 <hr>
 
 ### 🔥💻 Developer Journal Entry - Big Entry, Lot's of work
