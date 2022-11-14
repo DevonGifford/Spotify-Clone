@@ -1294,7 +1294,7 @@ In summary, these awe-inspiring enhancements have leveled up the application's f
 <br>
 <!-- -------------------------------------------------------------------------- -->
 
-### <strong>`Steps to Fetch all Song's (with associated data and images)`<strong>
+### <strong>`Steps to Fetch all Song's (with associated data and images)`</strong>
 <hr>
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -1449,7 +1449,7 @@ and then render it on the page
 <br>
 
 
-<strong>ERROR<strong>
+<strong>ERROR</strong>
 
 ```error
 Unhandled Runtime Error
@@ -1459,13 +1459,13 @@ See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
 
 <br>
 
-<strong>REASON<strong>
+<strong>REASON</strong>
 
 One of the pages that leverages the next/image component, passed a src value that uses a hostname in the URL that isn't defined in the images.remotePatterns in next.config.js.
 
 <br>
 
-<strong>SOLUTION<strong>
+<strong>SOLUTION</strong>
 
 >Add my supabase domain to the images config in next.config.js:
 
@@ -1514,7 +1514,7 @@ const nextConfig = {
 
 
 
-### <strong>`Steps to create the Middleware`<strong> 
+### <strong>`Steps to create the Middleware`</strong> 
 <hr>
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -1547,7 +1547,7 @@ const nextConfig = {
 <br/><br/>
 <!-- -------------------------------------------------------------------------- -->
 
-### <strong>`Steps to create the Users Library`<strong> 
+### <strong>`Steps to create the Users Library`</strong> 
 <hr>
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -1687,7 +1687,7 @@ export const revalidate = 0;
 <!-- -------------------------------------------------------------------------- -->
 
 
-### <strong>`Steps to create the Search Functionality`<strong> 
+### <strong>`Steps to create the Search Functionality`</strong> 
 <hr>
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -1901,7 +1901,7 @@ if (songs.length === 0) {
 <!-- -------------------------------------------------------------------------- -->
 
 
-### <strong>`Steps to create the Like/Favourite Functionality`<strong> 
+### <strong>`Steps to create the Like/Favourite Functionality`</strong> 
 <hr>
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container open -->
@@ -2568,7 +2568,383 @@ npm i use-sound
 
 
 
+## 7. STRIPE INTEGRATION & FUNCTIONALITY 
+<hr>
 
+### 🔥💻 Developer Journal Entry - Stripes as natural as a Zebra
+
+🤘👨‍💻 Stripes all over this project 🔥💯 <br>
+In this update, I've leveled up my project & made significant progress by integrating the Stripe payment platform and creating a killer testing environment using the Stripe CLI, ensuring a seamless user experience.🌟💳💻
+
+One of the key features I implemented was <strong>setting up Stripe</strong> using the @stripe/stripe-js library, 
+I've unleashed the power of Stripe to securely collect payments, process transactions, and manage subscriptions. Users can now make smooth transactions and take full control of their subscriptions with a single click! 🚀💸💪
+
+How did you do all that you ask? 
+Well, to make the integration seamless and efficient, I've created an <strong>arsenal of helper functions</strong>. 💪🛠️ These functions handle crucial tasks behind the scenes, ensuring a smooth experience for both users and developers.
+
+But wait, there's even more! 
+To ensure bulletproof development, I've set up a mind-blowing <strong>webhook that effortlessly receives real-time events</strong> from Stripe. 🎉🔗 This game-changing integration keeps my app in sync with Stripe's data, delivering up-to-the-minute updates on product creations, price changes, and subscription statuses. It's like having a direct line to the Stripe universe! 🌌🌐
+
+And guess what? 
+I've amped up the excitement by creating a sick <strong>testing environment using the Stripe CLI</strong>! 🚀🔧 Now I can simulate Stripe events locally, stream API requests, and meticulously fine-tune my webhook integration. It's like having Stripe's power right at my fingertips! 💪🌟💻
+
+Showcased my mad skills in Stripe integration, CLI wizardry, and webhook sorcery. 🎩💥 With my ability to blend cutting-edge tech with a seamless user experience, I'm feeling good about this project! Next up, lets create that subscription page on the front-end and truly test our stripe integration🚀🔥
+
+
+### For detailed overview of what I did ...
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Loading & Error Handeling`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Handeling Error's 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Really simple if we ever get an error we are just going to display the following return
+
+```tsx
+"use client";
+
+import Box from "@/components/Box";
+
+const Error = () => {
+  return ( 
+    <Box className="h-full flex items-center justify-center">
+      <div className="text-neutral-400">
+        Something went wrong.
+      </div>
+    </Box>
+  );
+}
+ 
+export default Error;
+```
+
+</details>
+<br/><br/>
+
+#### Handeling Loading animations 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Really simple if the app is loading between switiching pages, we are just going to display the following react spinner
+
+```tsx
+"use client";
+
+import { BounceLoader } from "react-spinners";
+
+import Box from "@/components/Box";
+
+const Loading = () => {
+  return ( 
+    <Box className="h-full flex items-center justify-center">
+      <BounceLoader color="#22c55e" size={40} />
+    </Box>
+  );
+}
+ 
+export default Loading;
+```
+
+</details>
+<br/><br/>
+
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+### <strong>`Creating the helper functions`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+>I have done this a couple times in variouse projects, so I am not going to go too in depth with the developer journal.
+>I will try give a brief bullet point on all the steps <br>
+
+####  1. Setting up environments 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+-  Creating a new stripe project from stripe dashboard
+-  Adding the public and secret keys to the `.env` file
+-  Creating a `lib` folder to assist the logic for stripe, the following code will be in said folder 
+
+</details>
+<br/><br/>
+
+
+####  2. Creating a `stripe.ts` file, 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+responsible for setting up the necessary infrastructure to integrate Stripe:
+     - creates a new instance of the Stripe class, 
+     - passing the Stripe secret key from the environment variables
+     - and additional configuration options.
+
+</details>
+<br/><br/>
+
+
+####  3. Creating a `stripeClient.ts` file, 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+resposible for providing (and abstracting) the client interface for interacting with the Stripe library. <br> This file handles the  asynchronously loading and initialization of the Stripe client and exposes a function to retrieve an instance of the client when needed.
+   1. involved installing the @stripe/stripe-js package
+   2. The stripePromise allows for lazy-loading and ensures that the client is only initialized once and reused throughout the application.
+
+</details>
+<br/><br/>
+
+
+####  4. Creating a `helpers.ts` file, utility functions that assist in common tasks
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+1.  `getURL`: <strong>This function retrieves the URL of the site</strong>
+       -  checks the NEXT_PUBLIC_SITE_URL environment variable, which will be set to the live site URL in the production environment. 
+       -  If that is not available, it checks the NEXT_PUBLIC_VERCEL_URL environment variable, which is automatically set by Vercel. 
+       -  If neither is present, it defaults to http://localhost:3000/
+       -  Additionally the function ensures that the URL starts with https:// if it doesn't already and appends a trailing / if it's missing.<br><br>
+  
+   2. `postData`: <strong>This function performs a POST request to the specified URL with optional data</strong>
+       -  It uses the fetch API to make the request asynchronously. 
+       -  The function accepts an object with the url and data properties. 
+       -  The url parameter represents the endpoint to which the request is made, and the data parameter contains the payload to be sent in the request body as JSON. 
+       -  The function sets the necessary headers, including Content-Type: application/json, and specifies the credentials option as same-origin to include cookies when making the request. 
+       -  It then sends the request, checks the response status, and returns the response as JSON if it is successful. 
+       -  If the response status is not successful, it throws an error.<br><br>
+
+   2. `toDateTime`: <strong>This function converts a timestamp in seconds to a Date object.</strong>
+       - It takes a parameter secs, representing the number of seconds since the Unix epoch (January 1, 1970). 
+       - The function creates a new Date object initialized with a fixed date representing the Unix epoch start and sets the seconds based on the provided value. 
+       - It then returns the resulting Date object.
+
+</details>
+<br/><br/>
+
+
+####  5. Creating a `superbaseAdmin.ts` file 
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+responsible for holding all of the helper for the webhook of stripe and necessary functionality for integrating and synchronizing data between Supabase
+
+ - <strong>Importing Dependencies:</strong><br> 
+    The file imports the necessary libraries and modules, including Stripe for interacting with the Stripe API and createClient from @supabase/supabase-js for creating a Supabase client.
+
+ - <strong>Configuration:</strong> <br> 
+    The file initializes the supabaseAdmin client using the createClient function with the Supabase URL and the Supabase service role key obtained from environment variables. This client allows you to interact with the Supabase database.
+
+ - <strong>Upserting Product and Price Records:</strong><br> 
+    The file defines the functions ``upsertProductRecord`` and `upsertPriceRecord` responsible for inserting or updating product and price data in the Supabase database. These functions receive product and price objects from Stripe and transform them into the corresponding data structures expected by the database. The transformed data is then upserted (inserted or updated) into the products and prices tables in Supabase.
+
+ - <strong>Customer Management:</strong><br>
+    The file includes the function `createOrRetrieveCustomer` that handles creating or retrieving a customer in Stripe based on their UUID. It checks if a customer with the given UUID exists in the Supabase database, and if not, it creates a new customer in Stripe and inserts the customer's ID into the Supabase customers table.
+
+ - <strong>Copying Billing Details:</strong><br> 
+    The `copyBillingDetailsToCustomer` function copies the billing details (name, phone, and address) from a Stripe payment method to the corresponding customer object in Stripe. It also updates the billing address and payment method details in the Supabase users table.
+
+ - <strong>Subscription Status Management:</strong><br> 
+    The `manageSubscriptionStatusChange` function handles the management of subscription status changes in Stripe. It retrieves the latest status of a subscription from Stripe, transforms the data, and upserts it into the Supabase subscriptions table. If it's a new subscription, it also calls the copyBillingDetailsToCustomer function to copy the billing details to the customer object. (COSTLY but neccessary)
+
+</details>
+<br/><br/>
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+### <strong>`Creating the webhook & setting up stripe CLI for local testing `</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Creating `route.ts` webhook
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+> Webhook endpoint that handles incoming events from Stripe.
+> Receives incoming events from Stripe. It validates the events, determines the relevant events, and handles each event accordingly by calling the appropriate functions. If any errors occur, it logs the error and returns an error response. Finally, it sends a success response once all relevant events have been processed.
+
+- imports the necessary dependencies and functions from various libraries and local files.
+- `relevantEvents` set contains a list of event types that are relevant to this webhook. These are the events that the webhook will handle.
+
+- The POST function is the entry point for the webhook endpoint. It accepts an incoming HTTP request.
+  - It retrieves the request body and the Stripe signature from the request headers.
+  - It gets the webhook secret from the environment variables.
+  - It uses the Stripe SDK's constructEvent method to validate the request and construct the event objec
+    - If there is an error during this process, it returns a 400 Bad Request response with an error message.
+
+- If the received event is one of the relevant events, the code enters a switch statement to handle each event type.
+  - For events related to product creation or update, 
+    - it calls the upsertProductRecord function, 
+    - passing the product object.
+  - For events related to price creation or update, 
+    - it calls the upsertPriceRecord function, 
+    - passing the price object.
+  - For events related to customer subscription creation, update, or deletion, 
+    - it calls the manageSubscriptionStatusChange function, 
+    - passing the subscription ID, customer ID, and a boolean indicating if it's a subscription creation event.
+  - For the checkout.session.completed event, 
+    - it checks if the session is for a subscription. 
+    - If so, it calls the manageSubscriptionStatusChange function, 
+    - passing the subscription ID, customer ID, and a boolean indicating it's a new subscription.
+  - If none of the event types match, 
+    - it throws an error indicating that an unhandled event was received.
+  - If there is an error during the event handling, it logs the error and returns a 400 Bad Request response with an error message. 
+
+- If the event is successfully handled, it returns a JSON response indicating that the event was received successfully with a status code of 200 OK.
+
+</details>
+<br/><br/>
+
+#### Setting up the STRIPE CLI
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Use Stripe CLI to simulate Stripe events in your local environment.The Stripe CLI is a developer tool to help you build, test, and manage your integration with Stripe directly from the command line.<br>Create, retrieve, update, or delete any of your Stripe resources in test mode (for example, create a product)<br>Stream real-time API requests and events happening in your account<br>Trigger events to test your webhooks integration
+
+[Get started with the Stripe CLI](https://stripe.com/docs/stripe-cli)
+
+##### 1. Download and install the CLI  - Windows (without Scoop):
+
+  1. Download the latest windows zip file from [GitHub](https://github.com/stripe/stripe-cli/releases/latest).
+   
+  2. Unzip the stripe_X.X.X_windows_x86_64.zip file.
+  
+  3. Add the path to the unzipped stripe.exe file to your Path environment variable.
+  
+  4. Finally, log in and authenticate your Stripe user Account to generate a set of restricted keys
+
+  
+   
+##### 2. log in with your Stripe account - second termial window (keep open)
+```shell
+stripe login
+```
+- Get the pairing code and confirm in the dashboard - verifies your authentication with Stripe. 
+
+
+##### 3. Forward events to your webhook
+```shell
+stripe listen --forward-to localhost:3000/api/webhook
+```
+- Copied the generated webhook signing secret key into the environment variables
+
+
+##### 4. Trigger events with the CLI
+```shell
+stripe trigger payment_intent.succeeded
+```
+- Confirm 200 status
+
+##### 5. Create product on stripe dashboard
+
+- Confirm 200 status
+- Confirm new product in supabase
+
+</details>
+<br/><br/>
+
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+
+
+### Libraries added
+<hr>
+<!-- container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+####  react-spinners
+
+```shell
+npm install react-spinners
+```
+
+>"react-spinners" is a package that offers a collection of loading spinner components for React applications. These spinners provide visual feedback to users while content or data is being loaded. With "react-spinners", developers can easily integrate customizable and visually appealing spinners into their React projects, improving the user experience by keeping users informed and reducing perceived delays.
+
+#### stripe-js
+
+```shell
+npm i @stripe/stripe-js
+```
+
+>a JavaScript library provided by Stripe, a popular payment processing platform. It enables developers to integrate Stripe's payment functionality into their web applications. With this package, developers can securely collect payment information from customers, handle payment processing, and manage subscriptions. The "@stripe/stripe-js" package provides a convenient and easy-to-use interface for interacting with Stripe's APIs and implementing payment-related features in web applications.
+
+
+
+
+
+
+<!-- container closed -->
+</details>
+<br/><br/>
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
 
 
 
