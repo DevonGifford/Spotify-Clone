@@ -2949,6 +2949,369 @@ npm i @stripe/stripe-js
 
 
 
+## 8. CREATING THE SUBSCRIBE MODAL & ACCOUNT PAGE 
+<hr>
+
+### 🔥💻 Developer Journal Entry - {Power-Packed Feature Blitz! 🎉💻}
+
+What's up, fellow tech enthusiasts and code warriors! It's time for one of the final epic developer updates.  This last one will blow your 🧦 off! 🔥
+
+✨ Checkout-session and portal-link routes: Say goodbye to clunky payment processes! We've created the super-smooth create-checkout-session and create-portal-link routes, bringing the 💸 checkout process and customer portal functionality to a whole new level. Seamless transactions? ✅ You got it! 🎯
+
+🌟 SubscribeModal Component: Oh boy, this one's a gem! Introducing the dazzling SubscribeModal component, built with meticulous precision. 🛠️ It flaunts mind-bending helper functions and harnesses the power of the useSubscribeModal hook. Subscribing to premium plans has never been more elegant! 💎💰
+
+🔥 Library Awesomeness: Brace yourselves, folks! We've turbocharged the Library component by integrating the 🔒 paywall concept. Only the chosen ones with a subscription can now unleash the true power of uploading songs. ⚡ Unlock the potential, amplify the experience! 🎵🔓
+
+🐛 Bug Fix Extravaganza: We vanquished a sneaky bug that plagued our users even after they logged out. No more awkward music lingering in the background! 🎵🙅 With our fix, the tunes stop in perfect harmony when you bid farewell to the app. 🎶✌️
+
+⚙️ Account Page Magic: Introducing the majestic "Account" page, your gateway to full control and customization! This beauty boasts an enchanting header, aptly titled "Account Settings." The star of the show? Our beloved AccountContent component, which adapts based on your authentication and subscription status. It's your personal realm of possibilities! 🌌🔐
+
+In a nutshell, these developer update have been a testament to my relentless pursuit of excellence. We've forged powerful features, crushed bugs, and crafted a delightful user experience. Stay tuned for the final update where push this project to prod! 🚀💡💥
+
+
+### For detailed overview of what I did ...
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+>NOTE:  Make sure you have both your proect running and your webhook's running
+
+### <strong>`Creating the checkout-session & portal routes`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Created `create-checkout-session` with new `route.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+text text
+
+</details>
+<br/><br/>
+
+#### Created `create-portal-link` with new `route.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+text texxt
+
+</details>
+<br/><br/>
+
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+### <strong>`Creating the Subscribe Modal `</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Created the new hook:  `useSubscribeModal.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Effectivly just a copy paste of the authModel hook I created in the beggining of the project.  Nothing exciting going on here in terms of development.
+
+
+
+</details>
+<br/><br/>
+
+#### Created new action: `getActiveProductsWithPrices.ts`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+>Effectivly just a copy paste of the getSongs action I created in the beggining of the project.  Nothing exciting going on here in terms of development, besides some minorchanges
+
+-  updating the return type to be:  `ProductWithPrice` (found in my `types.ts` file)
+-  updating the database call to use the relevant table and sort the data
+-  updatingthe `layout.tsx` to make use of this new action so that we can pass it into the `ModalProvider`
+```tsx
+  ...
+  const products = await getActiveProductsWithPrices();
+  
+  return (
+    ...
+    <ModalProvider  products={products}/>
+    ...
+```
+
+
+</details>
+<br/><br/>
+
+#### Created the new component: `SubscribeModal.tsx`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+Firstly,created the skeleton of the `SubscribeModal.tsx` and then imported this Modal into the `ModalProvider.tsx`
+- Adding an interface to the ModalProvider to accept the now passed in value `products`
+
+Now I can focus on developing the new `SubscribeModal.tsx`...
+
+
+
+1.  I imported the required dependencies and hooks.
+2.  I defined a helper function called formatPrice to format the price in a user-friendly currency format.
+```tsx
+const formatPrice = (price: Price) => {
+  const priceString = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: price.currency,
+    minimumFractionDigits: 0
+  }).format((price?.unit_amount || 0) / 100);
+
+  return priceString;
+};
+```
+3.  I declared the SubscribeModal component as a functional component that accepts the products prop of type ProductWithPrice[].
+
+4.  I initialized the required hooks and states.
+
+5.  I implemented the onChange function to handle the modal close event - i.e. use the little 'x' button.
+
+6.  I implemented the handleCheckout function as an asynchronous function that took a price parameter of type Price.
+    1.  I set the `priceIdLoading` state with the ID of the provided price.
+    
+    2.  I checked if the user was not signed in. If so, I reset the `priceIdLoading` state, displayed an error toast message indicating that the user must be logged in, and exited the function.
+    
+    3.  I checked if the user was already subscribed. If so, I reset the `priceIdLoading` state, displayed a toast message indicating that the user is already subscribed, and exited the function.
+    
+    4.  If the user was signed in and not subscribed, I proceeded to create a checkout session by making a `POST` request to the /`api/create-checkout-session endpoint` with the price data.
+    
+    5.  I retrieved the `sessionId` from the response.
+    ```tsx
+    try {
+      const { sessionId } = await postData({
+        url: '/api/create-checkout-session',
+        data: { price }
+      });
+    ```
+    
+    6.  I retrieved the Stripe instance by calling the getStripe function.
+    
+    7.  I initiated the checkout process by calling the `redirectToCheckout` method of the Stripe instance and passing the `sessionId`.
+    ```tsx
+    stripe?.redirectToCheckout({ sessionId });
+    ```
+    
+    8.  If any error occurred during the process, I displayed an error toast message with the error message.
+    
+    9.  Finally, I reset the `priceIdLoading` state to undefined.
+
+7.  I defined the content variable to display the appropriate content based on the user's subscription status and the availability of products.
+```tsx
+let content = (blah blah blah)
+
+if (products.length) {
+  content = (boo boo boo)
+}
+
+if (subscription) {
+  content = (dee dee dee)
+}
+```
+
+8.  I returned the Modal component with the appropriate content and props.
+
+9.  I exported the SubscribeModal component as the default export of the file.
+
+
+
+</details>
+<br/><br/>
+
+
+#### Adding the new funcitonality to `Library.tsx` - upload songs feature
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+I have decided to put the uploading of songs behind a paywall  Still debating if I should put the player functionality behind the paywall too 
+
+Simply adding to the `Library.tsx`:
+
+- importing the useSubscribeModal to the dependancies, as welll as defining it
+```tsx
+const subscribeModal = useSubscribeModal();
+```
+
+-  in the onclick funciton, created an additional if statement
+   -  checkig if the user is subscribed or not 
+   -  if not, it will open the subscribe modal. 
+
+```tsx
+const onClick = () => {
+  ...  
+  //check if subscribed 
+  if (!subscription){
+    return subscribeModal.onOpen();
+  }
+  ...
+```
+
+
+
+</details>
+<br/><br/>
+- library
+- 
+
+
+
+#### Quick Bug Fix: Logging out - music still plays
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+ISSUE 
+
+Upon logging out the music continuously plays
+While in the apps current form, the music is not behind any sort of paywall, eventually I may consider this.
+However even the apps current form, it gives the app a poor user experience.
+
+SOLUTION:
+
+In the `header.tsx`, simply adding in a few extra lines of code
+
+```tsx
+const player = usePlayer();
+```
+```tsx
+const handleLogout = async () => {
+  ...
+  player.reset();
+  ...
+```
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
+### <strong>`Creating the Account Page`</strong> 
+<hr>
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container open -->
+<details>
+<summary> Click here to expand: </summary>
+<br>
+<!-- -------------------------------------------------------------------------- -->
+
+#### Created the `page.tsx`
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+> displays the account settings page. It includes a header with the title "Account Settings" and renders the AccountContent component for the main content of the page.
+
+>Additionallly also added the loading and error files to this new account page folder. 
+
+1.  I imported the `Header` component from a specific location (@/components/Header) and the AccountContent component from the current directory (./components/AccountContent).
+  
+2.  I defined the Account functional component that renders the account settings page.
+
+3.  Inside the component's return statement, I created a div element with several CSS classes that style the component's background color, border radius, height, width, and scrolling behavior.
+
+4.  Within the div element, I rendered the `Header` component and passed a className prop with a CSS class that sets the background color of the `header`.
+
+5.  Inside the `Header` component, I rendered a div element with CSS classes for spacing and layout.
+
+6.  Within the inner div, I rendered an h1 element with text content "Account Settings" and CSS classes for text styling.
+
+7.  Finally, I rendered the AccountContent component, which represents the main content of the account settings page.
+
+
+</details>
+<br/><br/>
+
+#### Created the `AccountContent.tsx` in new components folder.
+<hr>
+<details>
+<summary> Click here to expand: </summary>
+<br>
+
+ >displays the specific content of the account settings page based on the user's authentication status and subscription information. It provides options for subscribing, viewing the current plan, and opening the customer portal.
+
+1.  I defined the AccountContent functional component that represents the content of the account settings page.
+
+2.  Inside the component, I accessed the router instance using `useRouter` and stored the result in the router variable. I also initialized the subscribeModal using the `useSubscribeModal` hook and accessed the isLoading, subscription, and user values using the useUser hook.
+
+3.  I used the `useState` hook to define the loading state variable and set its initial value to false.
+
+4.  I used the useEffect hook to redirect the user to the home page ('/') if the loading state is false and the user is not authenticated 
+```tsx
+(!isLoading && !user)
+```
+
+5.  I defined the `redirectToCustomerPortal` function that sets the loading state to true and sends a `POST` request to create a portal link. If successful, it redirects the user to the provided URL.
+
+6.  In the component's return statement, I rendered a div element 
+
+7.  Within the div element, I conditionally rendered content based on the presence or absence of a subscription.
+
+    1.  If there is no subscription, I rendered a div element with text content "No active plan" and a Button component for subscribing.
+
+    2.  If there is a subscription, I rendered a div element with text content mentioning the current plan's name and a Button component for opening the customer portal.
+
+
+</details>
+<br/><br/>
+
+
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- SECTION container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+<!-- -------------------------------------------------------------------------- -->
+<!-- ENTIRE container closed -->
+</details>
+<br/><br/>
+<!-- -------------------------------------------------------------------------- -->
+
+
+
 
 
 

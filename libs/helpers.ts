@@ -18,11 +18,14 @@ export const getURL = () => {
 
 
 
-export const postData = async ({  url,  data}: {
-    url: string;
-    data?: { price: Price };
+export const postData = async ({
+  url,
+  data
+}: {
+  url: string;
+  data?: { price: Price };
 }) => {
-  console.log('POST to stripe :', url, data);
+  console.log('posting,', url, data);
 
   const res: Response = await fetch(url, {
     method: 'POST',

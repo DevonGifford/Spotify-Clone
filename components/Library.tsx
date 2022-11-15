@@ -11,6 +11,7 @@ import MediaItem from "./MediaItem";
 
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import useSubscribeModal from "@/hooks/useSubscribeModal";
 
 // import useSubscribeModal from "@/hooks/useSubscribeModal";
 
@@ -20,19 +21,22 @@ interface LibraryProps {
   }
 
 const Library: React.FC<LibraryProps> = ({songs}) => {
-
+    const subscribeModal = useSubscribeModal();
     const authModal = useAuthModal();
     const uploadModal = useUploadModal();
     const { user, subscription } = useUser();
     const onPlay = useOnPlay(songs);
     
     const onClick = () => {
-        //if user not signed in - open the sign-in page
+        //check if signed in - open the sign-in page
         if (!user) {
             return authModal.onOpen();
           }
 
-        //To do check for subscription 
+        //check if subscribed 
+        if (!subscription){
+            return subscribeModal.onOpen();
+        }
 
         return uploadModal.onOpen();
     };
