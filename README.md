@@ -2952,19 +2952,19 @@ npm i @stripe/stripe-js
 ## 8. CREATING THE SUBSCRIBE MODAL & ACCOUNT PAGE 
 <hr>
 
-### 🔥💻 Developer Journal Entry - {Power-Packed Feature Blitz! 🎉💻}
+### 🔥💻 Developer Journal Entry - Power-Packed Feature Blitz! 🎉
 
-What's up, fellow tech enthusiasts and code warriors! It's time for one of the final epic developer updates.  This last one will blow your 🧦 off! 🔥
+What's up, fellow tech enthusiasts and code warriors, we are very near the end of the project! It's time for one of the final epic developer updates.  This last one will blow your 🧦 off! 🔥
 
-✨ Checkout-session and portal-link routes: Say goodbye to clunky payment processes! We've created the super-smooth create-checkout-session and create-portal-link routes, bringing the 💸 checkout process and customer portal functionality to a whole new level. Seamless transactions? ✅ You got it! 🎯
+✨ <strong>Checkout-session and portal-link routes:</strong><br> Say goodbye to clunky payment processes! We've created the super-smooth create-checkout-session and create-portal-link routes, bringing the 💸 checkout process and customer portal functionality to a whole new level. Seamless transactions? ✅ You got it! 🎯
 
-🌟 SubscribeModal Component: Oh boy, this one's a gem! Introducing the dazzling SubscribeModal component, built with meticulous precision. 🛠️ It flaunts mind-bending helper functions and harnesses the power of the useSubscribeModal hook. Subscribing to premium plans has never been more elegant! 💎💰
+🌟 <strong>SubscribeModal Component:</strong><br> Oh boy, this one's a gem! Introducing the dazzling SubscribeModal component, built with meticulous precision. 🛠️ It flaunts mind-bending helper functions and harnesses the power of the useSubscribeModal hook. Subscribing to premium plans has never been more elegant! 💎💰
 
-🔥 Library Awesomeness: Brace yourselves, folks! We've turbocharged the Library component by integrating the 🔒 paywall concept. Only the chosen ones with a subscription can now unleash the true power of uploading songs. ⚡ Unlock the potential, amplify the experience! 🎵🔓
+🔥 <strong>Library Awesomeness:</strong><br> Brace yourselves, folks! We've turbocharged the Library component by integrating the 🔒 paywall concept. Only the chosen ones with a subscription can now unleash the true power of uploading songs. ⚡ Unlock the potential, amplify the experience! 🎵🔓
 
-🐛 Bug Fix Extravaganza: We vanquished a sneaky bug that plagued our users even after they logged out. No more awkward music lingering in the background! 🎵🙅 With our fix, the tunes stop in perfect harmony when you bid farewell to the app. 🎶✌️
+🐛 <strong>Bug Fix Extravaganza:</strong><br> We vanquished a sneaky bug that plagued our users even after they logged out. No more awkward music lingering in the background! 🎵🙅 With our fix, the tunes stop in perfect harmony when you bid farewell to the app. 🎶✌️
 
-⚙️ Account Page Magic: Introducing the majestic "Account" page, your gateway to full control and customization! This beauty boasts an enchanting header, aptly titled "Account Settings." The star of the show? Our beloved AccountContent component, which adapts based on your authentication and subscription status. It's your personal realm of possibilities! 🌌🔐
+⚙️ <strong>Account Page Magic:</strong><br> Introducing the majestic "Account" page, your gateway to full control and customization! This beauty boasts an enchanting header, aptly titled "Account Settings." The star of the show? Our beloved AccountContent component, which adapts based on your authentication and subscription status. It's your personal realm of possibilities! 🌌🔐
 
 In a nutshell, these developer update have been a testament to my relentless pursuit of excellence. We've forged powerful features, crushed bugs, and crafted a delightful user experience. Stay tuned for the final update where push this project to prod! 🚀💡💥
 
