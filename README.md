@@ -2966,7 +2966,7 @@ What's up, fellow tech enthusiasts and code warriors, we are very near the end o
 
 ⚙️ <strong>Account Page Magic:</strong><br> Introducing the majestic "Account" page, your gateway to full control and customization! This beauty boasts an enchanting header, aptly titled "Account Settings." The star of the show? Our beloved AccountContent component, which adapts based on your authentication and subscription status. It's your personal realm of possibilities! 🌌🔐
 
-In a nutshell, these developer update have been a testament to my relentless pursuit of excellence. We've forged powerful features, crushed bugs, and crafted a delightful user experience. Stay tuned for the final update where push this project to prod! 🚀💡💥
+In a nutshell, these developer journals have been a testament to my relentless pursuit of excellence. We've forged powerful features, crushed bugs, and crafted a delightful user experience.  I think it's safe to say we have managed to clone Spotify! <br> <em>Dancing to the beats of my royalty free music</em>🕺🎵<br> Stay tuned for the final update where push this project to prod! 🚀💡💥
 
 
 ### For detailed overview of what I did ...
