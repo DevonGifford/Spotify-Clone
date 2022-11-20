@@ -94,17 +94,9 @@ Let's dive into the key features that make this project shine! 💡
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
-Note: This project is for educational purposes only and not affiliated with Spotify.
+- This project is for educational purposes only and not affiliated with Spotify.
 
-
-
-<!-- <li> The project places less emphasis on creating visually stunning designs. Instead, it prioritizes building and refining business logic, implementing functionality, and exploring diverse technologies.
-<br><br>
-<li> The user interface and design maintain a minimalistic and functional approach, allowing a greater focus on learning and development.
-<br><br>
-<li> This project doesn't aim to create a real store with actual products. Instead, the focus is on building business logic and refining development skills, simulating real-world scenarios and mirroring professional work environments.
-<br><br>
-You can see all tickets created & closed here  :   <a href="https://github.com/DevonGifford/Ecommerce_Showcase/issues?q=is%3Aissue+is%3Aclosed">Closed Tickets ✅</a> -->
+- Music from #Uppbeat (free for Creators!): <br>The songs used in this project are sourced from [Uppbeat](https://uppbeat.io/), a platform that offers music for creators. I have obtained the necessary licenses and have the License code to legally use these songs in my project. It ensures compliance with copyright laws and supports the artists who created the music.
 
 <br><br>
 
@@ -3518,7 +3510,10 @@ Note: This project is for personal and educational purposes only and not affilia
 <!-- -------------------------------------------------------------------------- -->
 
 
-
+<!-- -------------------------------------------------------------------------- -->
+<!-- DEV JOURNEY CONTAINER CLOSED -->
+</details>
+<!-- -------------------------------------------------------------------------- -->
 
 <!-- -------------------------------------------------------------------------- -->
 <!-- DEV JOURNEY CONTAINER CLOSED -->
