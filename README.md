@@ -2,7 +2,9 @@
 <div align="center">
     <h1>Spotify Clone</h1>
     <h4>(Portfolio Project)<h4>
-    <h3> 🎯🎯🎯 - insert live-link here -  🎯🎯🎯 </h3>
+    <a href='https://devon-fullstack-spotify-clone.vercel.app/', target='_blank'>
+      <h3> https://devon-fullstack-spotify-clone.vercel.app/ </h3>
+    <a/>
         <h6>
             built with <a href="https://nextjs.org">Next.js</a> &
             hosted by <a href="https://vercel.com/">Vercel</a> 
