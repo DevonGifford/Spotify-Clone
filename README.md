@@ -3224,6 +3224,9 @@ const handleLogout = async () => {
   ...
 ```
 
+</details>
+<br/><br/>
+
 <!-- -------------------------------------------------------------------------- -->
 <!-- SECTION container closed -->
 </details>
