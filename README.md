@@ -46,7 +46,7 @@ The primary goal of this project is to create a comprehensive Spotify clone that
 This Spotify clone project combines cutting-edge technologies, stunning design elements, and an intuitive user experience to provide a comprehensive music streaming platform. I invite you to explore the code, dive into the features, and witness the passion and expertise that went into its creation. 🎉🎵
 
 Let the music play, and let this Spotify clone project inspire your next groundbreaking endeavor! 🎶💻
-<br>
+<br><br>
 
 
 
@@ -94,9 +94,17 @@ Let's dive into the key features that make this project shine! 💡
 <!-- -------------------------------------------------------------------------- -->
 <hr>
 
+<!-- Small container -->
+<details>
+<summary> Click here to see all the features: </summary>
+<br/>
+
 - This project is for educational purposes only and not affiliated with Spotify.
 
 - Music from #Uppbeat (free for Creators!): <br>The songs used in this project are sourced from [Uppbeat](https://uppbeat.io/), a platform that offers music for creators. I have obtained the necessary licenses and have the License code to legally use these songs in my project. It ensures compliance with copyright laws and supports the artists who created the music.
+
+<!-- CLOSING DIV -->
+</details>
 
 <br><br>
 
