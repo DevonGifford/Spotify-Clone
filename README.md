@@ -2,10 +2,12 @@
 <div align="center">
     <h1>Fullstack Spotify Clone</h1>
     <h4>(Portfolio Project)<h4>
-    <h4>live demo</h4>
-    <a href='https://devon-fullstack-spotify-clone.vercel.app/', target='_blank'>
-      <h3> https://devon-fullstack-spotify-clone.vercel.app/ </h3>
-    <a/>
+    <h3> 
+      <a href='https://devon-fullstack-spotify-clone.vercel.app/', target='_blank'>
+        devon-fullstack-spotify-clone.vercel.app 
+      <a/>
+    <h5>live demo</h5>
+    </h3>
         <h6>
             built with <a href="https://nextjs.org">Next.js</a> &
             hosted by <a href="https://vercel.com/">Vercel</a> 
